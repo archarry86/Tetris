@@ -21,6 +21,7 @@ public class Frame extends JFrame {
 		
 		abstractGame.GameStar();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		addKeyListener(abstractGame);
 	}
 	
 }

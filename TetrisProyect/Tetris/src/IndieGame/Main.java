@@ -20,6 +20,7 @@ public class Main {
 		
 		Frame f = new Frame();
 		f.setVisible(true);
+		f.setLocationRelativeTo(null);
 	}	
 	
 }

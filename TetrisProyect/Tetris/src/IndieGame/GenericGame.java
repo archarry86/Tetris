@@ -17,19 +17,22 @@ public class GenericGame extends AbstractGame implements GameContext{
 
 	
 	private Juego j;
+	private Ficha ficha;
 	
 	public GenericGame(){
 		super();
 	
 		
-		
+		//addKeyListener(this);
 		j = new Juego();
 		
 		//Inicializar una lista
 		//TODO PASAR CREACION DE FICHAS A UN FACTORY
 		Random r = new Random();
-		int FichaInicial = (int)(r.nextDouble() * 8);
-		Ficha ficha = new Ficha(FichaInicial);
+		
+		int FichaInicial = (int)(r.nextDouble() * 7) + 1;
+				
+		ficha = new Ficha(FichaInicial);
 		ficha._contexto = this;
 		//
 		lista.add(ficha);//, this)); 
@@ -71,6 +74,8 @@ public class GenericGame extends AbstractGame implements GameContext{
 	@Override
 	public void keyPressed(KeyEvent arg0) {
 		// TODO Auto-generated method stub
+		System.out.println("KeyPressed " + arg0);
+		
 		
 	}
 
@@ -158,10 +163,11 @@ public class GenericGame extends AbstractGame implements GameContext{
 	public void SendMessage(Object obj, String Message) {
 		// TODO Auto-generated method stub
 		//TODO QUEMADO
-		Random r = new Random();
-		val =  val++ %9;
+		
+		val =  (val++ %7) + 1;
 		int FichaInicial =val;
-		Ficha ficha = new Ficha(FichaInicial);
+		ficha = new Ficha(FichaInicial);
+	
 		ficha._contexto = this;
 		//
 		lista.clear();

@@ -141,17 +141,18 @@ public class Ficha extends  Sprite {
 	@Override
 	protected void draw(Graphics2D g) {
 		
-		g.setColor(color);
-	
-		
-		
 		Vector2D vector = postion.Copy();
 		for(int i = 0;i<matrizFicha.length;i++ ){
 			
 			for(int j = 0;j<matrizFicha.length;j++ ){
 				
-				if(matrizFicha[i][j]==1 )
-				g.drawRect((int)vector.getX(), (int)vector.getY(), medidalado, medidalado);
+				if(matrizFicha[i][j]==1 ){
+					g.setColor(Color.black);
+					g.fillRect((int)vector.getX(), (int)vector.getY(), medidalado, medidalado);
+					
+					g.setColor(color);
+					g.fillRect((int)vector.getX()+2, (int)vector.getY()+2, medidalado-4, medidalado-4);
+				}
 				
 				vector = Vector2D.Add(vector, new Vector2D(medidalado,0));
 			}
