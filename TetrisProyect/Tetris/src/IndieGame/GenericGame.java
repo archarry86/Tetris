@@ -34,6 +34,8 @@ public class GenericGame extends AbstractGame implements GameContext{
 				
 		ficha = new Ficha(FichaInicial);
 		ficha._contexto = this;
+		//ficha._pto = 
+		
 		//
 		lista.add(ficha);//, this)); 
 	
@@ -158,16 +160,17 @@ public class GenericGame extends AbstractGame implements GameContext{
 		return new Vector2D(0, medidalado);
 	}
   //TODO ATRIBUTO MODEO TEXT
-	int val = 0;
+	int val = 6;
 	@Override
 	public void SendMessage(Object obj, String Message) {
 		// TODO Auto-generated method stub
 		//TODO QUEMADO
 		
-		val =  (val++ %7) + 1;
+		val =  (val++ %8) + 1;
 		int FichaInicial =val;
 		ficha = new Ficha(FichaInicial);
-	
+
+		System.out.println(" FichaInicial " + FichaInicial);	
 		ficha._contexto = this;
 		//
 		lista.clear();

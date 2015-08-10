@@ -118,7 +118,8 @@ public class Ficha extends  Sprite {
 			matrizFicha[0][0] = 1;			
 			matrizFicha[0][1] = 1;
 			matrizFicha[0][2] = 1;
-			matrizFicha[1][1] = 1;
+			matrizFicha[1][0] = 1;
+			matrizFicha[1][2] = 1;
 			break;
 			
 		default:
@@ -142,16 +143,20 @@ public class Ficha extends  Sprite {
 	protected void draw(Graphics2D g) {
 		
 		Vector2D vector = postion.Copy();
+		
+		
 		for(int i = 0;i<matrizFicha.length;i++ ){
 			
 			for(int j = 0;j<matrizFicha.length;j++ ){
 				
-				if(matrizFicha[i][j]==1 ){
+				if(matrizFicha[i][j]==1 )
+				{
 					g.setColor(Color.black);
-					g.fillRect((int)vector.getX(), (int)vector.getY(), medidalado, medidalado);
+					g.fillRect((int)vector.getX() + (GenericGame.Width/2) - medidalado, (int)vector.getY(), medidalado, medidalado);
 					
 					g.setColor(color);
-					g.fillRect((int)vector.getX()+2, (int)vector.getY()+2, medidalado-4, medidalado-4);
+					g.fillRect((int)vector.getX() + (GenericGame.Width/2) - medidalado +1, (int)vector.getY()+1, medidalado-2, medidalado-2);
+					
 				}
 				
 				vector = Vector2D.Add(vector, new Vector2D(medidalado,0));

@@ -6,6 +6,8 @@ public class Main {
 
 	public static void main(String[] args) {
 		
+		
+		
 		//Ficha ficha = new Ficha(3);	
 	
 		/*

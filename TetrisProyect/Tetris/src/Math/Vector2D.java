@@ -1,5 +1,7 @@
 package Math;
 
+import IndieGame.GenericGame;
+
 public class Vector2D {
 
 	
