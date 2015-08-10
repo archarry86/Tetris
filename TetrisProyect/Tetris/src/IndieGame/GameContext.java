@@ -1,5 +1,7 @@
 package IndieGame;
 
+import Math.Vector2D;
+
 public interface GameContext {
 
 
@@ -44,6 +46,13 @@ public interface GameContext {
 	
 	
 	public abstract boolean colisiono(Sprite s);
+	
+	
+	public abstract Vector2D getGravedad();
+	
+	
+	public abstract void SendMessage(Object obj, String Message);
+	
 	
 
 }

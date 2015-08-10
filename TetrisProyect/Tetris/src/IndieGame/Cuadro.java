@@ -1,7 +1,7 @@
+package IndieGame;
 import java.awt.Graphics2D;
 import java.awt.Shape;
 
-import IndieGame.Sprite;
 
 
 public class Cuadro extends Sprite  {

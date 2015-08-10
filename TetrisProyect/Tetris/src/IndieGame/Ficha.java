@@ -1,7 +1,11 @@
+package IndieGame;
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Shape;
+import java.util.Random;
 
-import IndieGame.Sprite;
+import Math.Vector2D;
+
 
 
 public class Ficha extends  Sprite {
@@ -15,9 +19,20 @@ public class Ficha extends  Sprite {
 	public final static int TIPO7 = 7;
 	public final static int TIPO8 = 8;
 	
+	private Color color = null;
 	
+	
+	
+	public Color getC() {
+		return color;
+	}
+	
+	
+
 	private int[][] matrizFicha;
 	int tipo;
+	
+	private int medidalado= 0;
 	
 	/* Fichas
 	 * 
@@ -43,9 +58,21 @@ public class Ficha extends  Sprite {
 	 * 8  [][][] 
 	 * 	  []  []  
 	 * */
-	public Ficha(int forma){
+	public Ficha(int forma){//, GameContext contexto ){
+		
+		super();
+	
+	
+	
+		postion = new Vector2D();
+		Random r = new Random();
+		color = new Color( r.nextInt());
 		matrizFicha = new int[4][4];
 		tipo = forma;
+		
+		medidalado =  GenericGame.Width / Juego.COLUMNAS;
+		this._height = medidalado* matrizFicha.length;
+		this._width=medidalado* matrizFicha.length;
 		
 		switch (forma) {
 		case TIPO1:
@@ -113,8 +140,53 @@ public class Ficha extends  Sprite {
 
 	@Override
 	protected void draw(Graphics2D g) {
-		// TODO Auto-generated method stub
 		
+		g.setColor(color);
+	
+		
+		
+		Vector2D vector = postion.Copy();
+		for(int i = 0;i<matrizFicha.length;i++ ){
+			
+			for(int j = 0;j<matrizFicha.length;j++ ){
+				
+				if(matrizFicha[i][j]==1 )
+				g.drawRect((int)vector.getX(), (int)vector.getY(), medidalado, medidalado);
+				
+				vector = Vector2D.Add(vector, new Vector2D(medidalado,0));
+			}
+			vector = Vector2D.Add(postion, new Vector2D(0,medidalado));
+		}
+		// TODO Auto-generated method stub
+		/*switch (tipo) {
+		case TIPO1:
+			
+			break;
+		case TIPO2:
+			
+			break;
+		case TIPO3:
+			
+			break;
+		case TIPO4:
+			
+			break;
+		case TIPO5:
+		
+			break;
+		case TIPO6:
+		
+			break;
+		case TIPO7:
+		
+			break;
+		case TIPO8:
+			
+			break;
+			
+		default:
+			break;
+		}	*/	
 	}
 
 	@Override
@@ -126,6 +198,11 @@ public class Ficha extends  Sprite {
 	@Override
 	protected void update() {
 		// TODO Auto-generated method stub
+		postion = Vector2D.Add(postion, _contexto.getGravedad());
+		if(postion.getY() > GenericGame.Height){
+			//TODO metodo de ejemplo
+			_contexto.SendMessage(this, "REMOVER_FICHA");
+		}
 		
 	}
 	

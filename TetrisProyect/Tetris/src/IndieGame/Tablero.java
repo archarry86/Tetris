@@ -1,3 +1,4 @@
+package IndieGame;
 
 public class Tablero {
 	

@@ -23,7 +23,7 @@ public abstract class AbstractGame extends JPanel implements Runnable,KeyListene
 	
 	public final static int NO_DELAYS_PER_YIELD=16;
 	
-	public  static int FPS=50;
+	public  static int FPS=2;
 	
 	protected  long periodo=1000/FPS;
 	
@@ -60,6 +60,7 @@ public abstract class AbstractGame extends JPanel implements Runnable,KeyListene
     
     public void GameStar()
     {
+    	//TODO corregir 
     	addControl();
     	buffer=new BufferedImage(Width,Height,BufferedImage.TYPE_INT_RGB);
     	Thread game=new Thread(this);

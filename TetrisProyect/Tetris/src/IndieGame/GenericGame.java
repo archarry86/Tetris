@@ -10,13 +10,31 @@ import java.util.Random;
 
 import javax.imageio.ImageIO;
 
+import Math.Vector2D;
+
 
 public class GenericGame extends AbstractGame implements GameContext{
 
 	
+	private Juego j;
+	
 	public GenericGame(){
-	super();
-	Random r = new Random();
+		super();
+	
+		
+		
+		j = new Juego();
+		
+		//Inicializar una lista
+		//TODO PASAR CREACION DE FICHAS A UN FACTORY
+		Random r = new Random();
+		int FichaInicial = (int)(r.nextDouble() * 8);
+		Ficha ficha = new Ficha(FichaInicial);
+		ficha._contexto = this;
+		//
+		lista.add(ficha);//, this)); 
+	
+	
 	
    }
 	
@@ -26,6 +44,8 @@ public class GenericGame extends AbstractGame implements GameContext{
 		for(Sprite s:this.lista){
 			s.update();
 		}
+		
+		
 	}
 
 	@Override
@@ -124,6 +144,28 @@ public class GenericGame extends AbstractGame implements GameContext{
 	    	g.drawImage(buffer,0,0,this);
 	    
 		
+	}
+
+	@Override
+	public Vector2D getGravedad() {
+		// TODO Auto-generated method stub
+		int medidalado =  GenericGame.Width / Juego.COLUMNAS;
+		return new Vector2D(0, medidalado);
+	}
+  //TODO ATRIBUTO MODEO TEXT
+	int val = 0;
+	@Override
+	public void SendMessage(Object obj, String Message) {
+		// TODO Auto-generated method stub
+		//TODO QUEMADO
+		Random r = new Random();
+		val =  val++ %9;
+		int FichaInicial =val;
+		Ficha ficha = new Ficha(FichaInicial);
+		ficha._contexto = this;
+		//
+		lista.clear();
+		lista.add(ficha);//, this)); 
 	}
 
 }
