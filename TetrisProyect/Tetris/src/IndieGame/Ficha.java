@@ -151,12 +151,19 @@ public class Ficha extends  Sprite {
 				
 				if(matrizFicha[i][j]==1 )
 				{
-					g.setColor(Color.black);
-					g.fillRect((int)vector.getX() + (GenericGame.Width/2) - medidalado, (int)vector.getY(), medidalado, medidalado);
+					//g.setColor(Color.black);
+					//g.fillRect((int)vector.getX() + (GenericGame.Width/2) - medidalado, (int)vector.getY(), medidalado, medidalado);
+					
+					//g.setColor(color);
+					//g.fillRect((int)vector.getX() + (GenericGame.Width/2) - medidalado +1, (int)vector.getY()+1, medidalado-2, medidalado-2);
 					
 					g.setColor(color);
-					g.fillRect((int)vector.getX() + (GenericGame.Width/2) - medidalado +1, (int)vector.getY()+1, medidalado-2, medidalado-2);
+					g.fillRect((int)vector.getX() + (GenericGame.Width/2) - medidalado , (int)vector.getY(), medidalado, medidalado);
 					
+					g.setColor(Color.black);
+					g.drawRect((int)vector.getX() + (GenericGame.Width/2) - medidalado , (int)vector.getY(), medidalado, medidalado);
+					
+															
 				}
 				
 				vector = Vector2D.Add(vector, new Vector2D(medidalado,0));
