@@ -39,7 +39,7 @@ public class GenericGame extends AbstractGame implements GameContext{
 		//
 		lista.add(ficha);//, this)); 
 	
-	
+
 	
    }
 	
@@ -60,8 +60,10 @@ public class GenericGame extends AbstractGame implements GameContext{
     	/*g.setColor(Color.WHITE);
     	g.fillRect(0, 0, Whidt,Height);
     	*/
+        	
     	g.setColor(Color.WHITE);
-    	g.fillRect(0, 0, GenericGame.Width,GenericGame.Height);
+    	g.fillRect(0, 0, GenericGame.Width,GenericGame.Height);    	
+    	
     	
     	for(Sprite s:this.lista){
 			s.draw(g);
@@ -148,7 +150,11 @@ public class GenericGame extends AbstractGame implements GameContext{
 		// TODO Auto-generated method stub
 		
 	    	Graphics2D g=(Graphics2D) getGraphics();
-	    	g.drawImage(buffer,0,0,this);
+	    	
+	    	g.drawRect(18, 18, GenericGame.Width+3, GenericGame.Height+3);
+	    	g.drawRect(19, 19, GenericGame.Width+1, GenericGame.Height+1);
+	    	
+	    	g.drawImage(buffer,20,20,this);
 	    
 		
 	}

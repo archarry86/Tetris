@@ -9,6 +9,7 @@ public class Frame extends JFrame {
 
 	public final static int ALTO_FRAME = 900;
 	public final static int ANCHO_FRAME = 600;
+	public final static String TITULO = "Tetris";
 	
 	private AbstractGame abstractGame;
 	
@@ -17,6 +18,7 @@ public class Frame extends JFrame {
 		abstractGame = new GenericGame();
 		
 		setSize(ANCHO_FRAME,ALTO_FRAME);
+		setTitle(TITULO);
 		add(abstractGame);
 		
 		abstractGame.GameStar();

@@ -163,7 +163,6 @@ public class Ficha extends  Sprite {
 					g.setColor(Color.black);
 					g.drawRect((int)vector.getX() + (GenericGame.Width/2) - medidalado , (int)vector.getY(), medidalado, medidalado);
 					
-															
 				}
 				
 				vector = Vector2D.Add(vector, new Vector2D(medidalado,0));
