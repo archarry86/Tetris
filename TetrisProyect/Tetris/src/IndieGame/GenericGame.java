@@ -81,10 +81,10 @@ public class GenericGame extends AbstractGame implements GameContext{
 		System.out.println("Keyressed " + arg0);
 		switch (arg0.getKeyCode()) {
 		case KeyEvent.VK_LEFT:
-			ficha.Move(-1);
+			ficha.move(-1);
 			break;
 		case KeyEvent.VK_RIGHT:
-			ficha.Move(1);
+			ficha.move(1);
 			break;
 		case KeyEvent.VK_SPACE:
 			

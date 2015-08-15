@@ -19,7 +19,7 @@ public class Ficha extends  Sprite {
 	public final static int TIPO7 = 7;
 	public final static int TIPO8 = 8;
 	
-	private Color color = null;
+	protected Color color = null;
 	
 	
 	
@@ -31,10 +31,13 @@ public class Ficha extends  Sprite {
 	
 	
 
-	private int[][] matrizFicha;
-	int tipo;
+	protected  int[][] matrizFicha;
+	protected int tipo;
 	
-	private int medidalado= 0;
+	protected int medidalado= 0;
+	
+	protected int orientation= 0;
+	
 	
 	private Vector2D direction =null;
 	
@@ -83,24 +86,21 @@ public class Ficha extends  Sprite {
 		switch (forma) {
 		case TIPO1:
 			matrizFicha[0][0] = 1;
-			_width = medidalado;
-			_height = medidalado;
+			
 			break;
 		case TIPO2:
 			matrizFicha[0][0] = 1;			
 			matrizFicha[1][0] = 1;
 			matrizFicha[1][1] = 1;
 			matrizFicha[1][2] = 1;
-			_width = medidalado * 2;
-			_height = medidalado * 2;
+			
 			break;
 		case TIPO3:
 			matrizFicha[0][0] = 1;			
 			matrizFicha[0][1] = 1;
 			matrizFicha[1][1] = 1;
 			matrizFicha[1][2] = 1;
-			_width = medidalado * 2;
-			_height = medidalado * 2;
+			
 			break;
 		case TIPO4:
 			matrizFicha[0][2] = 1;			
@@ -138,13 +138,58 @@ public class Ficha extends  Sprite {
 			break;
 		}		
 	}	 	
-	
-	public void Move(int scalar) {
+	public static Ficha FactoryFicha(int forma){
+		Ficha f= null;
+		switch (forma) {
+		case TIPO1:
+			
+			
+			break;
+		case TIPO2:
+		
+			
+			break;
+		case TIPO3:
+			
+			
+			break;
+		case TIPO4:
+			
+			break;
+		case TIPO5:
+			
+			break;
+		case TIPO6:
+			
+			break;
+		case TIPO7:
+			
+			break;
+		case TIPO8:
+		
+			break;
+			
+		default:
+			break;
+		}	
+		
+		return f;
+	}
+	public void move(int scalar) {
 		Vector2D 	newposition = Vector2D.Add(position, direction.Multiply(scalar));
 		boolean flag = true;
 		if(flag)
 		position = newposition;
 		
+	}
+	
+	public void rotate(){
+		orientation++;
+		orientation = orientation % 4;
+		
+		int aux =_height;
+		_height = _width;
+		_width = aux;
 	}
 	
 	public int[][] getFicha(){
@@ -165,30 +210,63 @@ public class Ficha extends  Sprite {
 		Vector2D vector = position.Copy();
 		
 		
-		for(int i = 0;i<matrizFicha.length;i++ ){
+		if(orientation %2 == 0){
 			
-			for(int j = 0;j<matrizFicha.length;j++ ){
+			for(int i = 0;i<matrizFicha.length;i++ ){
 				
-				if(matrizFicha[i][j]==1 )
-				{
-					//g.setColor(Color.black);
-					//g.fillRect((int)vector.getX() + (GenericGame.Width/2) - medidalado, (int)vector.getY(), medidalado, medidalado);
+				for(int j = 0;j<matrizFicha[0].length;j++ ){
 					
-					//g.setColor(color);
-					//g.fillRect((int)vector.getX() + (GenericGame.Width/2) - medidalado +1, (int)vector.getY()+1, medidalado-2, medidalado-2);
+					if(matrizFicha[i][j]==1 )
+					{
+						//g.setColor(Color.black);
+						//g.fillRect((int)vector.getX() + (GenericGame.Width/2) - medidalado, (int)vector.getY(), medidalado, medidalado);
+						
+						//g.setColor(color);
+						//g.fillRect((int)vector.getX() + (GenericGame.Width/2) - medidalado +1, (int)vector.getY()+1, medidalado-2, medidalado-2);
+						
+						g.setColor(color);
+						g.fillRect((int)vector.getX(), (int)vector.getY(), medidalado, medidalado);
+						
+						g.setColor(Color.black);
+						g.drawRect((int)vector.getX(), (int)vector.getY(), medidalado, medidalado);
+						
+					}
 					
-					g.setColor(color);
-					g.fillRect((int)vector.getX(), (int)vector.getY(), medidalado, medidalado);
-					
-					g.setColor(Color.black);
-					g.drawRect((int)vector.getX(), (int)vector.getY(), medidalado, medidalado);
-					
+					vector = Vector2D.Add(vector, new Vector2D(medidalado,0));
 				}
-				
-				vector = Vector2D.Add(vector, new Vector2D(medidalado,0));
+				vector = Vector2D.Add(position, new Vector2D(0,medidalado));
 			}
-			vector = Vector2D.Add(position, new Vector2D(0,medidalado));
 		}
+		else{
+			
+			for(int i = matrizFicha.length-1;i>0;i-- ){
+				
+				for(int j = 0;j<matrizFicha[0].length;j++ ){
+					
+					if(matrizFicha[i][j]==1 )
+					{
+						//g.setColor(Color.black);
+						//g.fillRect((int)vector.getX() + (GenericGame.Width/2) - medidalado, (int)vector.getY(), medidalado, medidalado);
+						
+						//g.setColor(color);
+						//g.fillRect((int)vector.getX() + (GenericGame.Width/2) - medidalado +1, (int)vector.getY()+1, medidalado-2, medidalado-2);
+						
+						g.setColor(color);
+						g.fillRect((int)vector.getX(), (int)vector.getY(), medidalado, medidalado);
+						
+						g.setColor(Color.black);
+						g.drawRect((int)vector.getX(), (int)vector.getY(), medidalado, medidalado);
+						
+					}
+					
+					vector = Vector2D.Add(vector, new Vector2D(0,medidalado));
+				}
+				vector = Vector2D.Add(position, new Vector2D(medidalado,0));
+			}
+		}
+		
+		
+		
 		// TODO Auto-generated method stub
 		/*switch (tipo) {
 		case TIPO1:
