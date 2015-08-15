@@ -78,8 +78,18 @@ public class GenericGame extends AbstractGame implements GameContext{
 	@Override
 	public void keyPressed(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-		System.out.println("KeyPressed " + arg0);
-		
+		System.out.println("Keyressed " + arg0);
+		switch (arg0.getKeyCode()) {
+		case KeyEvent.VK_LEFT:
+			ficha.Move(-1);
+			break;
+		case KeyEvent.VK_RIGHT:
+			ficha.Move(1);
+			break;
+		case KeyEvent.VK_SPACE:
+			
+			break;
+		} 
 		
 	}
 

@@ -23,6 +23,8 @@ public class Ficha extends  Sprite {
 	
 	
 	
+	
+	
 	public Color getC() {
 		return color;
 	}
@@ -33,6 +35,8 @@ public class Ficha extends  Sprite {
 	int tipo;
 	
 	private int medidalado= 0;
+	
+	private Vector2D direction =null;
 	
 	/* Fichas
 	 * 
@@ -62,33 +66,41 @@ public class Ficha extends  Sprite {
 		
 		super();
 	
+		medidalado =  GenericGame.Width / Juego.COLUMNAS;
 	
-	
-		postion = new Vector2D();
+		//position = new Vector2D();		
+		position = new Vector2D((GenericGame.Width/2) - medidalado , 0);
+		direction = new Vector2D(medidalado, 0);
 		Random r = new Random();
 		color = new Color( r.nextInt());
 		matrizFicha = new int[4][4];
 		tipo = forma;
 		
-		medidalado =  GenericGame.Width / Juego.COLUMNAS;
+		
 		this._height = medidalado* matrizFicha.length;
 		this._width=medidalado* matrizFicha.length;
 		
 		switch (forma) {
 		case TIPO1:
 			matrizFicha[0][0] = 1;
+			_width = medidalado;
+			_height = medidalado;
 			break;
 		case TIPO2:
 			matrizFicha[0][0] = 1;			
 			matrizFicha[1][0] = 1;
 			matrizFicha[1][1] = 1;
 			matrizFicha[1][2] = 1;
+			_width = medidalado * 2;
+			_height = medidalado * 2;
 			break;
 		case TIPO3:
 			matrizFicha[0][0] = 1;			
 			matrizFicha[0][1] = 1;
 			matrizFicha[1][1] = 1;
 			matrizFicha[1][2] = 1;
+			_width = medidalado * 2;
+			_height = medidalado * 2;
 			break;
 		case TIPO4:
 			matrizFicha[0][2] = 1;			
@@ -127,6 +139,14 @@ public class Ficha extends  Sprite {
 		}		
 	}	 	
 	
+	public void Move(int scalar) {
+		Vector2D 	newposition = Vector2D.Add(position, direction.Multiply(scalar));
+		boolean flag = true;
+		if(flag)
+		position = newposition;
+		
+	}
+	
 	public int[][] getFicha(){
 		return matrizFicha;
 	}
@@ -142,7 +162,7 @@ public class Ficha extends  Sprite {
 	@Override
 	protected void draw(Graphics2D g) {
 		
-		Vector2D vector = postion.Copy();
+		Vector2D vector = position.Copy();
 		
 		
 		for(int i = 0;i<matrizFicha.length;i++ ){
@@ -158,16 +178,16 @@ public class Ficha extends  Sprite {
 					//g.fillRect((int)vector.getX() + (GenericGame.Width/2) - medidalado +1, (int)vector.getY()+1, medidalado-2, medidalado-2);
 					
 					g.setColor(color);
-					g.fillRect((int)vector.getX() + (GenericGame.Width/2) - medidalado , (int)vector.getY(), medidalado, medidalado);
+					g.fillRect((int)vector.getX(), (int)vector.getY(), medidalado, medidalado);
 					
 					g.setColor(Color.black);
-					g.drawRect((int)vector.getX() + (GenericGame.Width/2) - medidalado , (int)vector.getY(), medidalado, medidalado);
+					g.drawRect((int)vector.getX(), (int)vector.getY(), medidalado, medidalado);
 					
 				}
 				
 				vector = Vector2D.Add(vector, new Vector2D(medidalado,0));
 			}
-			vector = Vector2D.Add(postion, new Vector2D(0,medidalado));
+			vector = Vector2D.Add(position, new Vector2D(0,medidalado));
 		}
 		// TODO Auto-generated method stub
 		/*switch (tipo) {
@@ -210,8 +230,8 @@ public class Ficha extends  Sprite {
 	@Override
 	protected void update() {
 		// TODO Auto-generated method stub
-		postion = Vector2D.Add(postion, _contexto.getGravedad());
-		if(postion.getY() > GenericGame.Height){
+		position = Vector2D.Add(position, _contexto.getGravedad());
+		if(position.getY() > GenericGame.Height){
 			//TODO metodo de ejemplo
 			_contexto.SendMessage(this, "REMOVER_FICHA");
 		}

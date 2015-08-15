@@ -10,7 +10,7 @@ import Math.Vector2D;
 public abstract class Sprite {
 	protected int animPeriod=1000/10;//TimeSpan.FromTicks((10000000 / 10)).Milliseconds;
 	
-    protected Vector2D postion;
+    protected Vector2D position;
 	protected  BufferedImage hojaSprite=null;
 	protected int  []_pto=new int[]{0,0};
 	protected int _width;

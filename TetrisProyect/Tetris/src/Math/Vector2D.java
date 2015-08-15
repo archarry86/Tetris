@@ -40,6 +40,11 @@ public class Vector2D {
 	public Vector2D Copy() {
 		return new Vector2D(_x,_y);
 	}
+
+	public Vector2D Multiply(int scalar) {
+		// TODO Auto-generated method stub
+		return new Vector2D(_x* scalar,_y* scalar);
+	}
 	
 	
 }
