@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.io.Console;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,8 +20,8 @@ import Math.Vector2D;
 public class GenericGame extends AbstractGame implements GameContext{
 
 	
-	private Juego j;
-	private Ficha ficha;
+	private Juego j = null;
+	private Ficha ficha = null;
 	
 	public GenericGame(){
 		super();
@@ -84,7 +85,7 @@ public class GenericGame extends AbstractGame implements GameContext{
 	@Override
 	public void keyPressed(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-		System.out.println("Keyressed " + arg0);
+
 		switch (arg0.getKeyCode()) {
 		case KeyEvent.VK_LEFT:
 			ficha.move(-1);
@@ -94,6 +95,7 @@ public class GenericGame extends AbstractGame implements GameContext{
 			break;
 		case KeyEvent.VK_SPACE:
 			ficha.rotate();
+			System.out.println(ficha.toString());
 			break;
 		} 
 		
@@ -191,7 +193,17 @@ public class GenericGame extends AbstractGame implements GameContext{
 	@Override
 	public void SendMessage(Object obj, String Message) {
 		// TODO Auto-generated method stub
-		//TODO QUEMADO
+		
+		
+		if(Message.equals(Ficha.UBICARFICHA))
+		{
+			System.out.println(j.toString());	
+			j.tablero.agregarFicha(ficha);
+			System.out.println(j.toString());	
+			j.renewBoard();
+		}
+		
+//TODO QUEMADO
 		
 		val =  (val++ %8) + 1;
 		//val= 2;
@@ -203,11 +215,6 @@ public class GenericGame extends AbstractGame implements GameContext{
 		//
 		lista.clear();
 		lista.add(ficha);//, this)); 
-		
-		if(Message.equals(Ficha.UBICARFICHA))
-		{
-			
-		}
 	}
 
 }

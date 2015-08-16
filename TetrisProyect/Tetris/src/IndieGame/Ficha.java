@@ -281,9 +281,11 @@ public class Ficha extends  Sprite {
 		break;
 		case 1:
 				
-				for(int i = matrizFicha.length-1;i>-1;i-- ){				
-					for(int j = 0;j<matrizFicha[0].length;j++,contador++ ){
+			for(int j = 0;j<matrizFicha[0].length;j++ ){				
+				for(int i = matrizFicha.length-1;i>-1;i--,contador++ )	{
 						matriz[contador/colsMatrizL][contador%colsMatrizL] = matrizFicha[i][j];
+						
+						
 					}
 				}
 				
@@ -297,8 +299,8 @@ public class Ficha extends  Sprite {
 		break;
 		case 3:
 				
-				for(int i = 0;i<matrizFicha.length;i++ ){				
-					for(int j = matrizFicha[0].length-1; j>-1 ;j--,contador++ ){
+			for(int j = matrizFicha[0].length-1; j>-1 ;j--){				
+					for(int i = 0;i<matrizFicha.length;i++ ,contador++ )	{
 						matriz[contador/colsMatrizL][contador%colsMatrizL] = matrizFicha[i][j];
 					}
 				}

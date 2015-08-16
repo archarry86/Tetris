@@ -5,14 +5,17 @@ public class Juego {
 
 	
 	
-	int[][] matrizTablero;	
+
 	final static int COLUMNAS = 10;
 	final static int FILAS = 20;
 	
+	Tablero tablero = null;
 	
 	public Juego(){
 		
-		matrizTablero = new int[FILAS][COLUMNAS];	
+	
+		tablero = new Tablero();
+	
 		/*
 		for (int i = 0; i < FILAS -1; i++) {
 			for (int j = 0; j < COLUMNAS -1; j++) {
@@ -61,21 +64,29 @@ public class Juego {
 	public void borrarLinea(int indice){
 		//System.out.println("index  " + indice);
 		//for (int i = indice; i < FILAS-1; i++) 
-			for (int j = 0; j < COLUMNAS-1; j++) 
-			{
-				matrizTablero[indice][j] = 0;
-				//System.out.print(matrizTablero[i][j]+ " ");
-			}
+			
 		//System.out.println();
 	}
 	
 	public void imprimirTablero(){
 		
-		for (int i = 0; i < FILAS-1; i++)
-		{ 
-			for (int j = 0; j < COLUMNAS-1; j++) 
-				System.out.print(matrizTablero[i][j] + " ");
-			System.out.println();
-		}	
+		
+	}
+
+
+	public String toString(){
+
+		String str = new String();
+		str += "JUEGO " + '\n';
+		str += "PUNTAJE " + '\n';
+		str += "TABLERO " + '\n';
+		str += tablero.toString();
+		return str;
+	}
+	
+
+	public void renewBoard() {
+		// TODO Auto-generated method stub
+		tablero = new Tablero();
 	}
 }

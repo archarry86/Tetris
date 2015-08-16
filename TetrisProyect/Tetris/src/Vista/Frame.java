@@ -1,5 +1,7 @@
 package Vista;
 
+import java.awt.Graphics;
+
 import javax.swing.JFrame;
 
 import IndieGame.AbstractGame;
@@ -35,4 +37,11 @@ public class Frame extends JFrame {
 		addKeyListener(abstractGame);
 	}
 	
+	
+	public void paint(Graphics g){
+		
+		super.paint(g);
+		
+		abstractGame.paintScreen();
+	}
 }
