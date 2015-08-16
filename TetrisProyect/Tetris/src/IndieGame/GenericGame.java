@@ -181,6 +181,11 @@ public class GenericGame extends AbstractGame implements GameContext{
 		int medidalado =  GenericGame.Width / Juego.COLUMNAS;
 		return new Vector2D(0, medidalado);
 	}
+	
+	public static int getMedidaLado(){
+		return GenericGame.Width / Juego.COLUMNAS;	
+	}
+	
   //TODO ATRIBUTO MODEO TEXT
 	int val = 6;
 	@Override
@@ -198,6 +203,11 @@ public class GenericGame extends AbstractGame implements GameContext{
 		//
 		lista.clear();
 		lista.add(ficha);//, this)); 
+		
+		if(Message.equals(Ficha.UBICARFICHA))
+		{
+			
+		}
 	}
 
 }

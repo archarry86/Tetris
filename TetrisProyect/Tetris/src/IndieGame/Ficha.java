@@ -19,17 +19,18 @@ public class Ficha extends  Sprite {
 	public final static int TIPO7 = 7;
 	public final static int TIPO8 = 8;
 	
+	public final static String UBICARFICHA = "UBICAR_FICHA";
+	
 	protected Color color = null;
 	
-	
-	
-	
+	private int filasMatrizL;
+	private int colsMatrizL;
+
 	
 	public Color getC() {
 		return color;
 	}
-	
-	
+		
 
 	protected  int[][] matrizFicha;
 	protected int tipo;
@@ -79,11 +80,12 @@ public class Ficha extends  Sprite {
 	
 		tipo = forma;
 		
-
 		
 		switch (forma) {
 		case TIPO1:
 			
+			filasMatrizL = 1;
+			colsMatrizL = 1;
 			matrizFicha = new int[1][1];
 			this._height = medidalado* matrizFicha.length;
 			this._width=medidalado* matrizFicha.length;
@@ -92,6 +94,8 @@ public class Ficha extends  Sprite {
 			
 			break;
 		case TIPO2:
+			filasMatrizL = 2;
+			colsMatrizL = 3;
 			matrizFicha = new int[2][3];
 			this._height = medidalado* 2;//matrizFicha.length;
 			this._width=medidalado* 3;//matrizFicha.length;
@@ -104,6 +108,8 @@ public class Ficha extends  Sprite {
 			
 			break;
 		case TIPO3:
+			filasMatrizL = 2;
+			colsMatrizL = 3;
 			matrizFicha = new int[2][3];
 			this._height = medidalado* 2;//matrizFicha.length;
 			this._width=medidalado* 3;//matrizFicha.length;
@@ -115,6 +121,8 @@ public class Ficha extends  Sprite {
 			
 			break;
 		case TIPO4:
+			filasMatrizL = 2;
+			colsMatrizL = 3;
 			matrizFicha = new int[2][3];
 			this._height = medidalado* 2;//matrizFicha.length;
 			this._width=medidalado* 3;//matrizFicha.length;
@@ -126,10 +134,11 @@ public class Ficha extends  Sprite {
 			break;
 		case TIPO5:
 			
+			filasMatrizL = 1;
+			colsMatrizL = 4;
 			matrizFicha = new int[1][4];
 			this._height = medidalado* 1;//matrizFicha.length;
-			this._width=medidalado* 4;//matrizFicha.length;
-			
+			this._width=medidalado* 4;//matrizFicha.length;			
 			
 			matrizFicha[0][0] = 1;			
 			matrizFicha[0][1] = 1;
@@ -137,10 +146,12 @@ public class Ficha extends  Sprite {
 			matrizFicha[0][3] = 1;
 			break;
 		case TIPO6:
+			
+			filasMatrizL = 2;
+			colsMatrizL = 3;
 			matrizFicha = new int[2][3];
 			this._height = medidalado* 2;//matrizFicha.length;
-			this._width=medidalado* 3;//matrizFicha.length;
-			
+			this._width=medidalado* 3;//matrizFicha.length;			
 			
 			matrizFicha[0][1] = 1;			
 			matrizFicha[1][0] = 1;
@@ -148,6 +159,9 @@ public class Ficha extends  Sprite {
 			matrizFicha[1][2] = 1;
 			break;
 		case TIPO7:
+			
+			filasMatrizL = 2;
+			colsMatrizL = 2;
 			matrizFicha = new int[2][2];
 			this._height = medidalado* 2;//matrizFicha.length;
 			this._width=medidalado* 2;//matrizFicha.length;
@@ -158,10 +172,11 @@ public class Ficha extends  Sprite {
 			break;
 		case TIPO8:
 			
+			filasMatrizL = 2;
+			colsMatrizL = 3;
 			matrizFicha = new int[2][3];
 			this._height = medidalado* 2;//matrizFicha.length;
-			this._width=medidalado* 3;//matrizFicha.length;
-			
+			this._width=medidalado* 3;//matrizFicha.length;			
 			
 			matrizFicha[0][0] = 1;			
 			matrizFicha[0][1] = 1;
@@ -236,11 +251,77 @@ public class Ficha extends  Sprite {
 		int aux =_height;
 		_height = _width;
 		_width = aux;
+		
+		 aux = filasMatrizL;
+		filasMatrizL = colsMatrizL;
+		colsMatrizL = aux;
+				
+		int temp = (int)position.getX() + _width;
+		if (temp > GenericGame.Width){
+			
+			Vector2D v = new Vector2D(temp - GenericGame.Width,0).Multiply(-1);			
+			position = Vector2D.Add(position, v);			  
+		}
+		
 	}
 	
 	public int[][] getFicha(){
-		return matrizFicha;
+		
+		int[][] matriz = new int[filasMatrizL][colsMatrizL];
+		int contador = 0;
+		int pivote = filasMatrizL > colsMatrizL? filasMatrizL : colsMatrizL;
+		switch (orientation) {
+		case 0:
+			for(int i = 0;i<matrizFicha.length;i++ ){				
+				//int filtemp = contador/filasMatrizL;
+					for(int j = 0;j<matrizFicha[0].length;j++,contador++){
+						matriz[contador/colsMatrizL][contador%colsMatrizL] = matrizFicha[i][j];
+					}
+				}
+		break;
+		case 1:
+				
+				for(int i = matrizFicha.length-1;i>-1;i-- ){				
+					for(int j = 0;j<matrizFicha[0].length;j++,contador++ ){
+						matriz[contador/colsMatrizL][contador%colsMatrizL] = matrizFicha[i][j];
+					}
+				}
+				
+		break;
+		case 2:
+				for(int i = matrizFicha.length-1; i>-1 ;i-- ){				
+					for(int j = matrizFicha[0].length-1; j> -1 ;j--,contador++ ){
+						matriz[contador/colsMatrizL][contador%colsMatrizL] = matrizFicha[i][j];
+					}
+				}
+		break;
+		case 3:
+				
+				for(int i = 0;i<matrizFicha.length;i++ ){				
+					for(int j = matrizFicha[0].length-1; j>-1 ;j--,contador++ ){
+						matriz[contador/colsMatrizL][contador%colsMatrizL] = matrizFicha[i][j];
+					}
+				}
+		break;				
+		}
+		
+		return matriz;
 	}
+	
+	
+	public String toString(){
+		int[][] maux = getFicha();
+		
+		String fichaString = new String();
+		for (int i = 0; i < filasMatrizL*colsMatrizL; i++) {
+			fichaString = fichaString +  maux[i/colsMatrizL][i%colsMatrizL] + ' ';
+			if (i%colsMatrizL == colsMatrizL - 1) {
+				fichaString = fichaString + '\n';
+			}
+		}
+		return fichaString;
+	}
+	
 	
 	public void setFicha(int[][] m){
 		for (int i = 0; i < m.length; i++) 
@@ -258,8 +339,7 @@ public class Ficha extends  Sprite {
 		
 		switch (orientation) {
 			case 0:
-				for(int i = 0;i<matrizFicha.length;i++ ){
-					
+				for(int i = 0;i<matrizFicha.length;i++ ){					
 					for(int j = 0;j<matrizFicha[0].length;j++ ){
 						
 						if(matrizFicha[i][j]==1 )
@@ -393,7 +473,7 @@ public class Ficha extends  Sprite {
 		position = Vector2D.Add(position, _contexto.getGravedad());
 		if(position.getY() > GenericGame.Height- _height){
 			//TODO metodo de ejemplo
-			_contexto.SendMessage(this, "REMOVER_FICHA");
+			_contexto.SendMessage(this, "UBICAR_FICHA");
 		}
 		
 	}

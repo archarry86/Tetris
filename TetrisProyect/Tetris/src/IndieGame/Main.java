@@ -8,7 +8,15 @@ public class Main {
 		
 		
 		
-		//Ficha ficha = new Ficha(3);	
+		Ficha ficha = new Ficha(8);
+		System.out.println(	ficha);
+		ficha.rotate();
+		System.out.println(	ficha);
+		ficha.rotate();
+		System.out.println(	ficha);
+		ficha.rotate();
+		System.out.println(	ficha);
+	
 	
 		/*
 		for (int i = 0; i < 4; i++)
@@ -20,9 +28,13 @@ public class Main {
 		*/
 		//Juego juego = new Juego();
 		
+		
+		
 		Frame f = new Frame();
 		f.setVisible(true);
 		f.setLocationRelativeTo(null);
+		
+		
 	}	
 	
 }
