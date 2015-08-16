@@ -76,19 +76,27 @@ public class Ficha extends  Sprite {
 		direction = new Vector2D(medidalado, 0);
 		Random r = new Random();
 		color = new Color( r.nextInt());
-		matrizFicha = new int[4][4];
+	
 		tipo = forma;
 		
-		
-		this._height = medidalado* matrizFicha.length;
-		this._width=medidalado* matrizFicha.length;
+
 		
 		switch (forma) {
 		case TIPO1:
+			
+			matrizFicha = new int[1][1];
+			this._height = medidalado* matrizFicha.length;
+			this._width=medidalado* matrizFicha.length;
+			
 			matrizFicha[0][0] = 1;
 			
 			break;
 		case TIPO2:
+			matrizFicha = new int[2][3];
+			this._height = medidalado* 2;//matrizFicha.length;
+			this._width=medidalado* 3;//matrizFicha.length;
+			
+			
 			matrizFicha[0][0] = 1;			
 			matrizFicha[1][0] = 1;
 			matrizFicha[1][1] = 1;
@@ -96,6 +104,10 @@ public class Ficha extends  Sprite {
 			
 			break;
 		case TIPO3:
+			matrizFicha = new int[2][3];
+			this._height = medidalado* 2;//matrizFicha.length;
+			this._width=medidalado* 3;//matrizFicha.length;
+			
 			matrizFicha[0][0] = 1;			
 			matrizFicha[0][1] = 1;
 			matrizFicha[1][1] = 1;
@@ -103,30 +115,54 @@ public class Ficha extends  Sprite {
 			
 			break;
 		case TIPO4:
+			matrizFicha = new int[2][3];
+			this._height = medidalado* 2;//matrizFicha.length;
+			this._width=medidalado* 3;//matrizFicha.length;
+			
 			matrizFicha[0][2] = 1;			
 			matrizFicha[0][1] = 1;
 			matrizFicha[1][0] = 1;
 			matrizFicha[1][1] = 1;
 			break;
 		case TIPO5:
+			
+			matrizFicha = new int[1][4];
+			this._height = medidalado* 1;//matrizFicha.length;
+			this._width=medidalado* 4;//matrizFicha.length;
+			
+			
 			matrizFicha[0][0] = 1;			
 			matrizFicha[0][1] = 1;
 			matrizFicha[0][2] = 1;
 			matrizFicha[0][3] = 1;
 			break;
 		case TIPO6:
+			matrizFicha = new int[2][3];
+			this._height = medidalado* 2;//matrizFicha.length;
+			this._width=medidalado* 3;//matrizFicha.length;
+			
+			
 			matrizFicha[0][1] = 1;			
 			matrizFicha[1][0] = 1;
 			matrizFicha[1][1] = 1;
 			matrizFicha[1][2] = 1;
 			break;
 		case TIPO7:
+			matrizFicha = new int[2][2];
+			this._height = medidalado* 2;//matrizFicha.length;
+			this._width=medidalado* 2;//matrizFicha.length;
 			matrizFicha[0][0] = 1;	
 			matrizFicha[0][1] = 1;
 			matrizFicha[1][0] = 1;
 			matrizFicha[1][1] = 1;
 			break;
 		case TIPO8:
+			
+			matrizFicha = new int[2][3];
+			this._height = medidalado* 2;//matrizFicha.length;
+			this._width=medidalado* 3;//matrizFicha.length;
+			
+			
 			matrizFicha[0][0] = 1;			
 			matrizFicha[0][1] = 1;
 			matrizFicha[0][2] = 1;
@@ -138,46 +174,56 @@ public class Ficha extends  Sprite {
 			break;
 		}		
 	}	 	
+	/**
+	 * @param forma
+	 * @return
+	 */
+	/**
+	 * @param forma
+	 * @return
+	 */
 	public static Ficha FactoryFicha(int forma){
 		Ficha f= null;
-		switch (forma) {
-		case TIPO1:
-			
-			
-			break;
-		case TIPO2:
-		
-			
-			break;
-		case TIPO3:
-			
-			
-			break;
-		case TIPO4:
-			
-			break;
-		case TIPO5:
-			
-			break;
-		case TIPO6:
-			
-			break;
-		case TIPO7:
-			
-			break;
-		case TIPO8:
-		
-			break;
-			
-		default:
-			break;
-		}	
-		
+//		
+//		switch (forma) {
+//		case TIPO1:
+//			
+//			
+//			break;
+//		case TIPO2:
+//		
+//			
+//			break;
+//		case TIPO3:
+//			
+//			
+//			break;
+//		case TIPO4:
+//			
+//			break;
+//		case TIPO5:
+//			
+//			break;
+//		case TIPO6:
+//			
+//			break;
+//		case TIPO7:
+//			
+//			break;
+//		case TIPO8:
+//		
+//			break;
+//			
+//		default:
+//			break;
+//		}	
+//		
 		return f;
 	}
 	public void move(int scalar) {
 		Vector2D 	newposition = Vector2D.Add(position, direction.Multiply(scalar));
-		boolean flag = true;
+		boolean flag =newposition.getX() >= 0 &&  newposition.getX()+_width <= AbstractGame.Width ;
+		System.out.println(newposition);
 		if(flag)
 		position = newposition;
 		
@@ -210,60 +256,96 @@ public class Ficha extends  Sprite {
 		Vector2D vector = position.Copy();
 		
 		
-		if(orientation %2 == 0){
-			
-			for(int i = 0;i<matrizFicha.length;i++ ){
-				
-				for(int j = 0;j<matrizFicha[0].length;j++ ){
+		switch (orientation) {
+			case 0:
+				for(int i = 0;i<matrizFicha.length;i++ ){
 					
-					if(matrizFicha[i][j]==1 )
-					{
-						//g.setColor(Color.black);
-						//g.fillRect((int)vector.getX() + (GenericGame.Width/2) - medidalado, (int)vector.getY(), medidalado, medidalado);
+					for(int j = 0;j<matrizFicha[0].length;j++ ){
 						
-						//g.setColor(color);
-						//g.fillRect((int)vector.getX() + (GenericGame.Width/2) - medidalado +1, (int)vector.getY()+1, medidalado-2, medidalado-2);
+						if(matrizFicha[i][j]==1 )
+						{
+							
+							g.setColor(color);
+							g.fillRect((int)vector.getX(), (int)vector.getY(), medidalado, medidalado);
+							
+							g.setColor(Color.black);
+							g.drawRect((int)vector.getX(), (int)vector.getY(), medidalado, medidalado);
+							
+						}
 						
-						g.setColor(color);
-						g.fillRect((int)vector.getX(), (int)vector.getY(), medidalado, medidalado);
-						
-						g.setColor(Color.black);
-						g.drawRect((int)vector.getX(), (int)vector.getY(), medidalado, medidalado);
-						
+						vector = Vector2D.Add(vector, new Vector2D(medidalado,0));
 					}
-					
-					vector = Vector2D.Add(vector, new Vector2D(medidalado,0));
+					vector = Vector2D.Add(position, new Vector2D(0,medidalado));
 				}
-				vector = Vector2D.Add(position, new Vector2D(0,medidalado));
-			}
-		}
-		else{
-			
-			for(int i = matrizFicha.length-1;i>0;i-- ){
+			break;
+			case 1:
 				
-				for(int j = 0;j<matrizFicha[0].length;j++ ){
+				for(int i = matrizFicha.length-1;i>-1;i-- ){
 					
-					if(matrizFicha[i][j]==1 )
-					{
-						//g.setColor(Color.black);
-						//g.fillRect((int)vector.getX() + (GenericGame.Width/2) - medidalado, (int)vector.getY(), medidalado, medidalado);
+					for(int j = 0;j<matrizFicha[0].length;j++ ){
 						
-						//g.setColor(color);
-						//g.fillRect((int)vector.getX() + (GenericGame.Width/2) - medidalado +1, (int)vector.getY()+1, medidalado-2, medidalado-2);
+						if(matrizFicha[i][j]==1 )
+						{
+							
+							g.setColor(color);
+							g.fillRect((int)vector.getX(), (int)vector.getY(), medidalado, medidalado);
+							
+							g.setColor(Color.black);
+							g.drawRect((int)vector.getX(), (int)vector.getY(), medidalado, medidalado);
+							
+						}
 						
-						g.setColor(color);
-						g.fillRect((int)vector.getX(), (int)vector.getY(), medidalado, medidalado);
-						
-						g.setColor(Color.black);
-						g.drawRect((int)vector.getX(), (int)vector.getY(), medidalado, medidalado);
-						
+						vector = Vector2D.Add(vector, new Vector2D(0,medidalado));
 					}
-					
-					vector = Vector2D.Add(vector, new Vector2D(0,medidalado));
+					vector = Vector2D.Add(position, new Vector2D(medidalado,0));
 				}
-				vector = Vector2D.Add(position, new Vector2D(medidalado,0));
-			}
+				
+			break;
+			case 2:
+				for(int i = matrizFicha.length-1; i>-1 ;i-- ){
+					
+					for(int j = matrizFicha[0].length-1; j> -1 ;j-- ){
+						
+						if(matrizFicha[i][j]==1 )
+						{
+							
+							g.setColor(color);
+							g.fillRect((int)vector.getX(), (int)vector.getY(), medidalado, medidalado);
+							
+							g.setColor(Color.black);
+							g.drawRect((int)vector.getX(), (int)vector.getY(), medidalado, medidalado);
+							
+						}
+						
+						vector = Vector2D.Add(vector, new Vector2D(medidalado,0));
+					}
+					vector = Vector2D.Add(position, new Vector2D(0,medidalado));
+				}
+				break;
+			case 3:
+				
+				for(int i = 0;i<matrizFicha.length;i++ ){
+					
+					for(int j = matrizFicha[0].length-1; j>-1 ;j-- ){
+						
+						if(matrizFicha[i][j]==1 )
+						{
+							
+							g.setColor(color);
+							g.fillRect((int)vector.getX(), (int)vector.getY(), medidalado, medidalado);
+							
+							g.setColor(Color.black);
+							g.drawRect((int)vector.getX(), (int)vector.getY(), medidalado, medidalado);
+							
+						}
+						
+						vector = Vector2D.Add(vector, new Vector2D(0,medidalado));
+					}
+					vector = Vector2D.Add(position, new Vector2D(medidalado,0));
+				}
+				break;
 		}
+		
 		
 		
 		
@@ -309,7 +391,7 @@ public class Ficha extends  Sprite {
 	protected void update() {
 		// TODO Auto-generated method stub
 		position = Vector2D.Add(position, _contexto.getGravedad());
-		if(position.getY() > GenericGame.Height){
+		if(position.getY() > GenericGame.Height- _height){
 			//TODO metodo de ejemplo
 			_contexto.SendMessage(this, "REMOVER_FICHA");
 		}

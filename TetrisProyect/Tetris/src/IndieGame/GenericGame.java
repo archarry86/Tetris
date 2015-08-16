@@ -4,8 +4,11 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
+import java.util.Properties;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
@@ -42,6 +45,9 @@ public class GenericGame extends AbstractGame implements GameContext{
 
 	
    }
+	
+	
+
 	
 	@Override
 	public void Update() {
@@ -87,7 +93,7 @@ public class GenericGame extends AbstractGame implements GameContext{
 			ficha.move(1);
 			break;
 		case KeyEvent.VK_SPACE:
-			
+			ficha.rotate();
 			break;
 		} 
 		
@@ -183,6 +189,7 @@ public class GenericGame extends AbstractGame implements GameContext{
 		//TODO QUEMADO
 		
 		val =  (val++ %8) + 1;
+		//val= 2;
 		int FichaInicial =val;
 		ficha = new Ficha(FichaInicial);
 
