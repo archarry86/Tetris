@@ -42,7 +42,7 @@ public class GenericGame extends AbstractGame implements GameContext{
 		
 		//
 		lista.add(ficha);//, this)); 
-	
+		lista.add(j.tablero);
 
 	
    }
@@ -197,10 +197,10 @@ public class GenericGame extends AbstractGame implements GameContext{
 		
 		if(Message.equals(Ficha.UBICARFICHA))
 		{
-			System.out.println(j.toString());	
+			//System.out.println(j.toString());	
 			j.tablero.agregarFicha(ficha);
-			System.out.println(j.toString());	
-			j.renewBoard();
+			//System.out.println(j.toString());	
+			
 		}
 		
 //TODO QUEMADO
@@ -208,13 +208,13 @@ public class GenericGame extends AbstractGame implements GameContext{
 		val =  (val++ %8) + 1;
 		//val= 2;
 		int FichaInicial =val;
-		ficha = new Ficha(FichaInicial);
+		ficha.ReloadFicha(val);
 
 		System.out.println(" FichaInicial " + FichaInicial);	
 		ficha._contexto = this;
 		//
-		lista.clear();
-		lista.add(ficha);//, this)); 
+		
+		
 	}
 
 }

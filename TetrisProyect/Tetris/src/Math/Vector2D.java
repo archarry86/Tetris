@@ -46,6 +46,11 @@ public class Vector2D {
 		return new Vector2D(_x* scalar,_y* scalar);
 	}
 	
+	public Vector2D Div(int scalar) {
+		// TODO Auto-generated method stub
+		return new Vector2D(_x/ scalar,_y/ scalar);
+	}
+	
 	public String toString()
 	{
 		return "("+_x+","+_y+")";

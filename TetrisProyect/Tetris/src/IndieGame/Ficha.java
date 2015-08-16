@@ -189,6 +189,130 @@ public class Ficha extends  Sprite {
 			break;
 		}		
 	}	 	
+	
+	public void  ReloadFicha(int forma){//, GameContext contexto ){
+			
+			
+		
+			medidalado =  GenericGame.Width / Juego.COLUMNAS;
+		
+			//position = new Vector2D();		
+			position = new Vector2D((GenericGame.Width/2) - medidalado , 0);
+			direction = new Vector2D(medidalado, 0);
+			Random r = new Random();
+			color = new Color( r.nextInt());
+		
+			tipo = forma;
+			
+			
+			switch (forma) {
+			case TIPO1:
+				
+				filasMatrizL = 1;
+				colsMatrizL = 1;
+				matrizFicha = new int[1][1];
+				this._height = medidalado* matrizFicha.length;
+				this._width=medidalado* matrizFicha.length;
+				
+				matrizFicha[0][0] = 1;
+				
+				break;
+			case TIPO2:
+				filasMatrizL = 2;
+				colsMatrizL = 3;
+				matrizFicha = new int[2][3];
+				this._height = medidalado* 2;//matrizFicha.length;
+				this._width=medidalado* 3;//matrizFicha.length;
+				
+				
+				matrizFicha[0][0] = 1;			
+				matrizFicha[1][0] = 1;
+				matrizFicha[1][1] = 1;
+				matrizFicha[1][2] = 1;
+				
+				break;
+			case TIPO3:
+				filasMatrizL = 2;
+				colsMatrizL = 3;
+				matrizFicha = new int[2][3];
+				this._height = medidalado* 2;//matrizFicha.length;
+				this._width=medidalado* 3;//matrizFicha.length;
+				
+				matrizFicha[0][0] = 1;			
+				matrizFicha[0][1] = 1;
+				matrizFicha[1][1] = 1;
+				matrizFicha[1][2] = 1;
+				
+				break;
+			case TIPO4:
+				filasMatrizL = 2;
+				colsMatrizL = 3;
+				matrizFicha = new int[2][3];
+				this._height = medidalado* 2;//matrizFicha.length;
+				this._width=medidalado* 3;//matrizFicha.length;
+				
+				matrizFicha[0][2] = 1;			
+				matrizFicha[0][1] = 1;
+				matrizFicha[1][0] = 1;
+				matrizFicha[1][1] = 1;
+				break;
+			case TIPO5:
+				
+				filasMatrizL = 1;
+				colsMatrizL = 4;
+				matrizFicha = new int[1][4];
+				this._height = medidalado* 1;//matrizFicha.length;
+				this._width=medidalado* 4;//matrizFicha.length;			
+				
+				matrizFicha[0][0] = 1;			
+				matrizFicha[0][1] = 1;
+				matrizFicha[0][2] = 1;
+				matrizFicha[0][3] = 1;
+				break;
+			case TIPO6:
+				
+				filasMatrizL = 2;
+				colsMatrizL = 3;
+				matrizFicha = new int[2][3];
+				this._height = medidalado* 2;//matrizFicha.length;
+				this._width=medidalado* 3;//matrizFicha.length;			
+				
+				matrizFicha[0][1] = 1;			
+				matrizFicha[1][0] = 1;
+				matrizFicha[1][1] = 1;
+				matrizFicha[1][2] = 1;
+				break;
+			case TIPO7:
+				
+				filasMatrizL = 2;
+				colsMatrizL = 2;
+				matrizFicha = new int[2][2];
+				this._height = medidalado* 2;//matrizFicha.length;
+				this._width=medidalado* 2;//matrizFicha.length;
+				matrizFicha[0][0] = 1;	
+				matrizFicha[0][1] = 1;
+				matrizFicha[1][0] = 1;
+				matrizFicha[1][1] = 1;
+				break;
+			case TIPO8:
+				
+				filasMatrizL = 2;
+				colsMatrizL = 3;
+				matrizFicha = new int[2][3];
+				this._height = medidalado* 2;//matrizFicha.length;
+				this._width=medidalado* 3;//matrizFicha.length;			
+				
+				matrizFicha[0][0] = 1;			
+				matrizFicha[0][1] = 1;
+				matrizFicha[0][2] = 1;
+				matrizFicha[1][0] = 1;
+				matrizFicha[1][2] = 1;
+				break;
+				
+			default:
+				break;
+			}		
+		}	 	
 	/**
 	 * @param forma
 	 * @return
@@ -336,8 +460,15 @@ public class Ficha extends  Sprite {
 	@Override
 	protected void draw(Graphics2D g) {
 		
-		Vector2D vector = position.Copy();
+		//info
+		Vector2D vector = position.Copy().Div(medidalado);
 		
+		g.setColor(Color.RED);
+		
+		g.drawString(vector.toString(), (int)position.getX(), (int)position.getY()-10);
+		
+		
+		 vector = position.Copy();
 		
 		switch (orientation) {
 			case 0:
@@ -472,10 +603,15 @@ public class Ficha extends  Sprite {
 	@Override
 	protected void update() {
 		// TODO Auto-generated method stub
-		position = Vector2D.Add(position, _contexto.getGravedad());
-		if(position.getY() > GenericGame.Height- _height){
+	Vector2D	auxposition = Vector2D.Add(position, _contexto.getGravedad());
+		if(auxposition.getY() > GenericGame.Height- _height){
 			//TODO metodo de ejemplo
-			_contexto.SendMessage(this, "UBICAR_FICHA");
+			_contexto.SendMessage(this, "UBICAR_FICHA");			
+		}
+		else{
+			
+			position = auxposition;
+			
 		}
 		
 	}
