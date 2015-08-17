@@ -53,6 +53,7 @@ public interface GameContext {
 	
 	public abstract void SendMessage(Object obj, String Message);
 	
+	public abstract boolean SendGetMessageBool(Object obj, String Message);
 	
-
+	public abstract String SendGetMessageString(Object obj, String Message);
 }

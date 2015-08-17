@@ -20,6 +20,7 @@ public class Ficha extends  Sprite {
 	public final static int TIPO8 = 8;
 	
 	public final static String UBICARFICHA = "UBICAR_FICHA";
+	public final static String DETECT_COLISION = "DETECT_COLISION";
 	
 	protected Color color = null;
 	
@@ -70,13 +71,14 @@ public class Ficha extends  Sprite {
 		
 		super();
 	
-		medidalado =  GenericGame.Width / Juego.COLUMNAS;
+		medidalado = GenericGame.getMedidaLado();
 	
 		//position = new Vector2D();		
 		position = new Vector2D((GenericGame.Width/2) - medidalado , 0);
 		direction = new Vector2D(medidalado, 0);
 		Random r = new Random();
-		color = new Color( r.nextInt());
+		int vcolor = r.nextInt();
+		color = new Color( vcolor);
 	
 		tipo = forma;
 		
@@ -86,109 +88,130 @@ public class Ficha extends  Sprite {
 			
 			filasMatrizL = 1;
 			colsMatrizL = 1;
-			matrizFicha = new int[1][1];
+			matrizFicha = new int[filasMatrizL][colsMatrizL];
 			this._height = medidalado* matrizFicha.length;
 			this._width=medidalado* matrizFicha.length;
 			
-			matrizFicha[0][0] = 1;
+			matrizFicha[0][0] = vcolor;
 			
 			break;
 		case TIPO2:
 			filasMatrizL = 2;
 			colsMatrizL = 3;
-			matrizFicha = new int[2][3];
+			matrizFicha = new int[filasMatrizL][colsMatrizL];
 			this._height = medidalado* 2;//matrizFicha.length;
 			this._width=medidalado* 3;//matrizFicha.length;
 			
 			
-			matrizFicha[0][0] = 1;			
-			matrizFicha[1][0] = 1;
-			matrizFicha[1][1] = 1;
-			matrizFicha[1][2] = 1;
+			matrizFicha[0][0] = vcolor;			
+			matrizFicha[1][0] = vcolor;
+			matrizFicha[1][1] = vcolor;
+			matrizFicha[1][2] = vcolor;
 			
 			break;
 		case TIPO3:
 			filasMatrizL = 2;
 			colsMatrizL = 3;
-			matrizFicha = new int[2][3];
+			matrizFicha = new int[filasMatrizL][colsMatrizL];
 			this._height = medidalado* 2;//matrizFicha.length;
 			this._width=medidalado* 3;//matrizFicha.length;
 			
-			matrizFicha[0][0] = 1;			
-			matrizFicha[0][1] = 1;
-			matrizFicha[1][1] = 1;
-			matrizFicha[1][2] = 1;
+			matrizFicha[0][0] = vcolor;			
+			matrizFicha[0][1] = vcolor;
+			matrizFicha[1][1] = vcolor;
+			matrizFicha[1][2] = vcolor;
 			
 			break;
 		case TIPO4:
 			filasMatrizL = 2;
 			colsMatrizL = 3;
-			matrizFicha = new int[2][3];
+			matrizFicha = new int[filasMatrizL][colsMatrizL];
 			this._height = medidalado* 2;//matrizFicha.length;
 			this._width=medidalado* 3;//matrizFicha.length;
 			
-			matrizFicha[0][2] = 1;			
-			matrizFicha[0][1] = 1;
-			matrizFicha[1][0] = 1;
-			matrizFicha[1][1] = 1;
+			matrizFicha[0][2] = vcolor;			
+			matrizFicha[0][1] = vcolor;
+			matrizFicha[1][0] = vcolor;
+			matrizFicha[1][1] = vcolor;
 			break;
 		case TIPO5:
 			
 			filasMatrizL = 1;
 			colsMatrizL = 4;
-			matrizFicha = new int[1][4];
+			matrizFicha = new int[filasMatrizL][colsMatrizL];
 			this._height = medidalado* 1;//matrizFicha.length;
 			this._width=medidalado* 4;//matrizFicha.length;			
 			
-			matrizFicha[0][0] = 1;			
-			matrizFicha[0][1] = 1;
-			matrizFicha[0][2] = 1;
-			matrizFicha[0][3] = 1;
+			matrizFicha[0][0] = vcolor;			
+			matrizFicha[0][1] = vcolor;
+			matrizFicha[0][2] = vcolor;
+			matrizFicha[0][3] = vcolor;
 			break;
 		case TIPO6:
 			
 			filasMatrizL = 2;
 			colsMatrizL = 3;
-			matrizFicha = new int[2][3];
+			matrizFicha = new int[filasMatrizL][colsMatrizL];
 			this._height = medidalado* 2;//matrizFicha.length;
 			this._width=medidalado* 3;//matrizFicha.length;			
 			
-			matrizFicha[0][1] = 1;			
-			matrizFicha[1][0] = 1;
-			matrizFicha[1][1] = 1;
-			matrizFicha[1][2] = 1;
+			matrizFicha[0][1] = vcolor;			
+			matrizFicha[1][0] = vcolor;
+			matrizFicha[1][1] = vcolor;
+			matrizFicha[1][2] = vcolor;
 			break;
 		case TIPO7:
 			
 			filasMatrizL = 2;
 			colsMatrizL = 2;
-			matrizFicha = new int[2][2];
+			matrizFicha = new int[filasMatrizL][colsMatrizL];
 			this._height = medidalado* 2;//matrizFicha.length;
 			this._width=medidalado* 2;//matrizFicha.length;
-			matrizFicha[0][0] = 1;	
-			matrizFicha[0][1] = 1;
-			matrizFicha[1][0] = 1;
-			matrizFicha[1][1] = 1;
+			matrizFicha[0][0] = vcolor;	
+			matrizFicha[0][1] = vcolor;
+			matrizFicha[1][0] = vcolor;
+			matrizFicha[1][1] = vcolor;
 			break;
 		case TIPO8:
 			
 			filasMatrizL = 2;
 			colsMatrizL = 3;
-			matrizFicha = new int[2][3];
+			matrizFicha = new int[filasMatrizL][colsMatrizL];
 			this._height = medidalado* 2;//matrizFicha.length;
 			this._width=medidalado* 3;//matrizFicha.length;			
 			
-			matrizFicha[0][0] = 1;			
-			matrizFicha[0][1] = 1;
-			matrizFicha[0][2] = 1;
-			matrizFicha[1][0] = 1;
-			matrizFicha[1][2] = 1;
+			matrizFicha[0][0] = vcolor;			
+			matrizFicha[0][1] = vcolor;
+			matrizFicha[0][2] = vcolor;
+			matrizFicha[1][0] = vcolor;
+			matrizFicha[1][2] = vcolor;
 			break;
 			
 		default:
 			break;
 		}		
 	}	 	
+	
+	public Ficha Copy(){
+		Ficha f = new Ficha(tipo);
+		f.colsMatrizL = colsMatrizL;
+		f.filasMatrizL = filasMatrizL;
+		f.direction = direction;
+		
+		f.matrizFicha = matrizFicha;
+		f.position = position;
+		/*new int[filasMatrizL][colsMatrizL];
+		
+			for(int i = 0; i< filasMatrizL ;i++ ){
+				for(int j = 0; j< colsMatrizL ;j++ ){
+					
+					f.matrizFicha[i][j]= matrizFicha[i][j];
+				}
+			}
+		*/			
+			
+		return f;
+	}
 	
 	public void  ReloadFicha(int forma){//, GameContext contexto ){
 			
@@ -200,7 +223,8 @@ public class Ficha extends  Sprite {
 			position = new Vector2D((GenericGame.Width/2) - medidalado , 0);
 			direction = new Vector2D(medidalado, 0);
 			Random r = new Random();
-			color = new Color( r.nextInt());
+			int vcolor = r.nextInt();
+			color = new Color( vcolor);
 		
 			tipo = forma;
 			
@@ -210,103 +234,103 @@ public class Ficha extends  Sprite {
 				
 				filasMatrizL = 1;
 				colsMatrizL = 1;
-				matrizFicha = new int[1][1];
+				matrizFicha = new int[filasMatrizL][colsMatrizL];
 				this._height = medidalado* matrizFicha.length;
 				this._width=medidalado* matrizFicha.length;
 				
-				matrizFicha[0][0] = 1;
+				matrizFicha[0][0] = vcolor;
 				
 				break;
 			case TIPO2:
 				filasMatrizL = 2;
 				colsMatrizL = 3;
-				matrizFicha = new int[2][3];
+				matrizFicha = new int[filasMatrizL][colsMatrizL];
 				this._height = medidalado* 2;//matrizFicha.length;
 				this._width=medidalado* 3;//matrizFicha.length;
 				
 				
-				matrizFicha[0][0] = 1;			
-				matrizFicha[1][0] = 1;
-				matrizFicha[1][1] = 1;
-				matrizFicha[1][2] = 1;
+				matrizFicha[0][0] = vcolor;			
+				matrizFicha[1][0] = vcolor;
+				matrizFicha[1][1] = vcolor;
+				matrizFicha[1][2] = vcolor;
 				
 				break;
 			case TIPO3:
 				filasMatrizL = 2;
 				colsMatrizL = 3;
-				matrizFicha = new int[2][3];
+				matrizFicha = new int[filasMatrizL][colsMatrizL];
 				this._height = medidalado* 2;//matrizFicha.length;
 				this._width=medidalado* 3;//matrizFicha.length;
 				
-				matrizFicha[0][0] = 1;			
-				matrizFicha[0][1] = 1;
-				matrizFicha[1][1] = 1;
-				matrizFicha[1][2] = 1;
+				matrizFicha[0][0] = vcolor;			
+				matrizFicha[0][1] = vcolor;
+				matrizFicha[1][1] = vcolor;
+				matrizFicha[1][2] = vcolor;
 				
 				break;
 			case TIPO4:
 				filasMatrizL = 2;
 				colsMatrizL = 3;
-				matrizFicha = new int[2][3];
+				matrizFicha = new int[filasMatrizL][colsMatrizL];
 				this._height = medidalado* 2;//matrizFicha.length;
 				this._width=medidalado* 3;//matrizFicha.length;
 				
-				matrizFicha[0][2] = 1;			
-				matrizFicha[0][1] = 1;
-				matrizFicha[1][0] = 1;
-				matrizFicha[1][1] = 1;
+				matrizFicha[0][2] = vcolor;			
+				matrizFicha[0][1] = vcolor;
+				matrizFicha[1][0] = vcolor;
+				matrizFicha[1][1] = vcolor;
 				break;
 			case TIPO5:
 				
 				filasMatrizL = 1;
 				colsMatrizL = 4;
-				matrizFicha = new int[1][4];
+				matrizFicha = new int[filasMatrizL][colsMatrizL];
 				this._height = medidalado* 1;//matrizFicha.length;
 				this._width=medidalado* 4;//matrizFicha.length;			
 				
-				matrizFicha[0][0] = 1;			
-				matrizFicha[0][1] = 1;
-				matrizFicha[0][2] = 1;
-				matrizFicha[0][3] = 1;
+				matrizFicha[0][0] = vcolor;			
+				matrizFicha[0][1] = vcolor;
+				matrizFicha[0][2] = vcolor;
+				matrizFicha[0][3] = vcolor;
 				break;
 			case TIPO6:
 				
 				filasMatrizL = 2;
 				colsMatrizL = 3;
-				matrizFicha = new int[2][3];
+				matrizFicha = new int[filasMatrizL][colsMatrizL];
 				this._height = medidalado* 2;//matrizFicha.length;
 				this._width=medidalado* 3;//matrizFicha.length;			
 				
-				matrizFicha[0][1] = 1;			
-				matrizFicha[1][0] = 1;
-				matrizFicha[1][1] = 1;
-				matrizFicha[1][2] = 1;
+				matrizFicha[0][1] = vcolor;			
+				matrizFicha[1][0] = vcolor;
+				matrizFicha[1][1] = vcolor;
+				matrizFicha[1][2] = vcolor;
 				break;
 			case TIPO7:
 				
 				filasMatrizL = 2;
 				colsMatrizL = 2;
-				matrizFicha = new int[2][2];
+				matrizFicha = new int[filasMatrizL][colsMatrizL];
 				this._height = medidalado* 2;//matrizFicha.length;
 				this._width=medidalado* 2;//matrizFicha.length;
-				matrizFicha[0][0] = 1;	
-				matrizFicha[0][1] = 1;
-				matrizFicha[1][0] = 1;
-				matrizFicha[1][1] = 1;
+				matrizFicha[0][0] = vcolor;	
+				matrizFicha[0][1] = vcolor;
+				matrizFicha[1][0] = vcolor;
+				matrizFicha[1][1] = vcolor;
 				break;
 			case TIPO8:
 				
 				filasMatrizL = 2;
 				colsMatrizL = 3;
-				matrizFicha = new int[2][3];
+				matrizFicha = new int[filasMatrizL][colsMatrizL];
 				this._height = medidalado* 2;//matrizFicha.length;
 				this._width=medidalado* 3;//matrizFicha.length;			
 				
-				matrizFicha[0][0] = 1;			
-				matrizFicha[0][1] = 1;
-				matrizFicha[0][2] = 1;
-				matrizFicha[1][0] = 1;
-				matrizFicha[1][2] = 1;
+				matrizFicha[0][0] = vcolor;			
+				matrizFicha[0][1] = vcolor;
+				matrizFicha[0][2] = vcolor;
+				matrizFicha[1][0] = vcolor;
+				matrizFicha[1][2] = vcolor;
 				break;
 				
 			default:
@@ -323,46 +347,13 @@ public class Ficha extends  Sprite {
 	 */
 	public static Ficha FactoryFicha(int forma){
 		Ficha f= null;
-//		
-//		switch (forma) {
-//		case TIPO1:
-//			
-//			
-//			break;
-//		case TIPO2:
-//		
-//			
-//			break;
-//		case TIPO3:
-//			
-//			
-//			break;
-//		case TIPO4:
-//			
-//			break;
-//		case TIPO5:
-//			
-//			break;
-//		case TIPO6:
-//			
-//			break;
-//		case TIPO7:
-//			
-//			break;
-//		case TIPO8:
-//		
-//			break;
-//			
-//		default:
-//			break;
-//		}	
-//		
+
 		return f;
 	}
 	public void move(int scalar) {
 		Vector2D 	newposition = Vector2D.Add(position, direction.Multiply(scalar));
 		boolean flag =newposition.getX() >= 0 &&  newposition.getX()+_width <= AbstractGame.Width ;
-		System.out.println(newposition);
+		//System.out.println(newposition);
 		if(flag)
 		position = newposition;
 		
@@ -475,7 +466,7 @@ public class Ficha extends  Sprite {
 				for(int i = 0;i<matrizFicha.length;i++ ){					
 					for(int j = 0;j<matrizFicha[0].length;j++ ){
 						
-						if(matrizFicha[i][j]==1 )
+						if(matrizFicha[i][j]!= 0 )
 						{
 							
 							g.setColor(color);
@@ -497,7 +488,7 @@ public class Ficha extends  Sprite {
 					
 					for(int j = 0;j<matrizFicha[0].length;j++ ){
 						
-						if(matrizFicha[i][j]==1 )
+						if(matrizFicha[i][j]!= 0)
 						{
 							
 							g.setColor(color);
@@ -519,7 +510,7 @@ public class Ficha extends  Sprite {
 					
 					for(int j = matrizFicha[0].length-1; j> -1 ;j-- ){
 						
-						if(matrizFicha[i][j]==1 )
+						if(matrizFicha[i][j]!= 0)
 						{
 							
 							g.setColor(color);
@@ -541,7 +532,7 @@ public class Ficha extends  Sprite {
 					
 					for(int j = matrizFicha[0].length-1; j>-1 ;j-- ){
 						
-						if(matrizFicha[i][j]==1 )
+						if(matrizFicha[i][j]!= 0)
 						{
 							
 							g.setColor(color);
@@ -604,7 +595,10 @@ public class Ficha extends  Sprite {
 	protected void update() {
 		// TODO Auto-generated method stub
 	Vector2D	auxposition = Vector2D.Add(position, _contexto.getGravedad());
-		if(auxposition.getY() > GenericGame.Height- _height){
+ 	Ficha cp = this.Copy();
+	cp.position = auxposition;
+	boolean resul = 	auxposition.getY() > GenericGame.Height- _height ||_contexto.SendGetMessageBool(cp, Ficha.DETECT_COLISION) ;
+		if( resul ){
 			//TODO metodo de ejemplo
 			_contexto.SendMessage(this, "UBICAR_FICHA");			
 		}

@@ -11,7 +11,11 @@ public class Tablero extends Sprite{
 	int[][] matrizTablero;	
 	
 	public Tablero(){
-		matrizTablero = new int[Juego.FILAS][Juego.COLUMNAS];
+
+		int c =GenericGame.Width / GenericGame.getMedidaLado();
+		int f =GenericGame.Height / GenericGame.getMedidaLado();
+	
+		matrizTablero = new int[f][c];
 		
 	}
 
@@ -57,31 +61,31 @@ public class Tablero extends Sprite{
 			g.drawString(""+j, medidaLado*j, 30);
 		}
 		
-		
-		for (int i = 0; i < matrizTablero.length; i++) 
+		//System.out.println("MATRIZ TABLERO "+matrizTablero.length+"_" +matrizTablero[0].length);
+		int i = 0;
+		for (; i < matrizTablero.length; i++) 
 		{
+		
 			for (int j = 0; j < matrizTablero[0].length; j++) 
 			{
-				if (matrizTablero[i][j] == 0) 
+				//System.out.print("[i"+i+",j"+j);
+				//System.out.print("- ip"+(i*medidaLado)+", jp"+(j*medidaLado)+"]");
+				if (matrizTablero[i][j] != 0) 
 				{
-					System.out.println("tetris hpta ");
 					
-					g.setColor(Color.YELLOW);					
-					g.fillRect(i*medidaLado, j*medidaLado, medidaLado, medidaLado);
 					
-					g.setColor(Color.black);
-					g.drawRect(i*medidaLado, j*medidaLado, medidaLado, medidaLado);
-				}
-				else{
-					g.setColor(Color.RED);					
-					g.fillRect(i*medidaLado, j*medidaLado, medidaLado, medidaLado);
+					g.setColor(new Color( matrizTablero[i][j]));					
+					g.fillRect(j*medidaLado, i*medidaLado, medidaLado, medidaLado);
 					
 					g.setColor(Color.black);
-					g.drawRect(i*medidaLado, j*medidaLado, medidaLado, medidaLado);
-					
+					g.drawRect(j*medidaLado, i*medidaLado, medidaLado, medidaLado);
 				}
+				
 			}
-		}		
+		//	System.out.println();
+		}
+		
+		//System.out.println("I"+i);
 		
 	}
 	
@@ -90,14 +94,14 @@ public class Tablero extends Sprite{
 		Vector2D positionFicha = ficha.position;
 		int medidaLado = GenericGame.getMedidaLado();
 		
-		System.out.println("medidaLado " + medidaLado);
+		//System.out.println("medidaLado " + medidaLado);
 		
 		int im = (int) (positionFicha.getX() / medidaLado);
 		int jm = (int) (positionFicha.getY() / medidaLado);
 		
-		System.out.println("im " + im + " ijm " + jm);
+		//System.out.println("im " + im + " ijm " + jm);
 		
-		System.out.println();
+		//System.out.println();
 		
 		
 		
@@ -107,13 +111,13 @@ public class Tablero extends Sprite{
 		{
 			for(int j=0; j< matriz[0].length;j++)
 			{
-				System.out.println("im " +( im+ i) + " ijm " +( jm+j));
+				//System.out.println("im " +( im+ i) + " ijm " +( jm+j));
+				if(matriz[i][j] != 0)
 				matrizTablero[jm+i][im+j]= matriz[i][j];
 			}
 		}
 
-		System.out.println("*************************************************************************");
-		System.out.println(toString());
+		
 		
 	}
 	
@@ -127,6 +131,34 @@ public class Tablero extends Sprite{
 			}
 		}
 		return str;
+	}
+
+	public boolean existsColision(Ficha ficha) {
+		// TODO Auto-generated method stub
+		boolean result = false;
+		Vector2D positionFicha = ficha.position;
+		int medidaLado = GenericGame.getMedidaLado();
+		
+	
+		int im = (int) (positionFicha.getX() / medidaLado);
+		int jm = (int) (positionFicha.getY() / medidaLado);
+		System.out.println(im+" "+jm);
+	
+		
+		
+		int [][] matriz = ficha.getFicha();
+		
+		for(int i=0; i< matriz.length&&!result;i++)
+		{
+			for(int j=0; j< matriz[0].length && !result;j++)
+			{
+				if(matriz[i][j]!= 0 )
+				result =	matrizTablero[jm+i][im+j] != 0;
+			}
+		}
+		
+		return result;
+
 	}
 	
 	

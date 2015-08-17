@@ -95,7 +95,7 @@ public class GenericGame extends AbstractGame implements GameContext{
 			break;
 		case KeyEvent.VK_SPACE:
 			ficha.rotate();
-			System.out.println(ficha.toString());
+		//	System.out.println(ficha.toString());
 			break;
 		} 
 		
@@ -210,11 +210,39 @@ public class GenericGame extends AbstractGame implements GameContext{
 		int FichaInicial =val;
 		ficha.ReloadFicha(val);
 
-		System.out.println(" FichaInicial " + FichaInicial);	
+		//System.out.println(" FichaInicial " + FichaInicial);	
 		ficha._contexto = this;
 		//
 		
 		
 	}
+
+
+
+
+	@Override
+	public boolean SendGetMessageBool(Object obj, String Message) {
+		// TODO Auto-generated method stub
+		boolean result = false;
+		if(Message.equals(Ficha.DETECT_COLISION)){
+			
+			result = j.tablero.existsColision((Ficha)obj);
+		}
+		return result;
+	}
+
+
+
+
+	@Override
+	public String SendGetMessageString(Object obj, String Message) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+
+	
 
 }

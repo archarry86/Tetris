@@ -26,6 +26,8 @@ public class GameProperties {
 			
 			AbstractGame.Width = Integer.parseInt(prop.getProperty("widht"));
 			AbstractGame.Height = Integer.parseInt(prop.getProperty("height"));
+			GenericGame.Width = Integer.parseInt(prop.getProperty("widht"));
+			GenericGame.Height = Integer.parseInt(prop.getProperty("height"));
 			
 		} catch (IOException ex) {
 			ex.printStackTrace();

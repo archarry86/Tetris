@@ -153,7 +153,7 @@ public abstract class AbstractGame extends JPanel implements Runnable,KeyListene
 			 }
 			 frames+=saltos;
 		}
-		System.out.println(saltosdaddos);
+		//System.out.println(saltosdaddos);
 		System.exit(0);
 	}
 	
@@ -167,5 +167,9 @@ public abstract class AbstractGame extends JPanel implements Runnable,KeyListene
 	   g.drawString(""+fps+"/"+FPS,100,10);
    }
    
+   
+  
+	
+
    
 }

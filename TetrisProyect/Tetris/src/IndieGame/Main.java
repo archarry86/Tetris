@@ -9,13 +9,13 @@ public class Main {
 		
 		
 		Ficha ficha = new Ficha(2);
-		System.out.println(	ficha);
+		//System.out.println(	ficha);
 		ficha.rotate();
-		System.out.println(	ficha);
+		//System.out.println(	ficha);
 		ficha.rotate();
-		System.out.println(	ficha);
+		//System.out.println(	ficha);
 		ficha.rotate();
-		System.out.println(	ficha);
+		//System.out.println(	ficha);
 	
 	
 		/*
