@@ -51,7 +51,7 @@ public class Tablero extends Sprite{
 	@Override
 	protected void draw(Graphics2D g) {
 		// TODO Auto-generated method stub
-		
+		///gamecomponente
 		int medidaLado = GenericGame.getMedidaLado();
 		
 		for (int i = 0; i <Juego.FILAS; i++) {
@@ -67,8 +67,9 @@ public class Tablero extends Sprite{
 			g.setColor(Color.BLACK);
 			g.drawString(""+j, medidaLado*j, 30);
 		}
-		
+		///
 		//System.out.println("MATRIZ TABLERO "+matrizTablero.length+"_" +matrizTablero[0].length);
+		///game compoente
 		int i = 0;
 		for (; i < matrizTablero.length; i++) 
 		{
@@ -91,7 +92,7 @@ public class Tablero extends Sprite{
 			}
 		//	System.out.println();
 		}
-		
+		///game compoente
 		//System.out.println("I"+i);
 		
 	}
@@ -105,6 +106,11 @@ public class Tablero extends Sprite{
 		int jm = (int) (positionFicha.getY() / medidaLado);
 		
 		int [][] matriz = ficha.getFicha();
+		System.out.println("agregrar ficha");
+		System.out.println(this);
+		System.out.println(ficha);
+		System.out.println("im "+ im + " jm "+jm + " posicion X " + positionFicha.getX() + " posicion Y " + positionFicha.getY());
+		
 		
 		for(int i=0; i< matriz.length;i++)
 		{
@@ -117,18 +123,6 @@ public class Tablero extends Sprite{
 		}
 	}
 	
-	public String toString(){
-
-		String str = new String();
-		for (int i = 0; i < matrizTablero.length*matrizTablero[0].length; i++) {
-			str = str +  matrizTablero[i/matrizTablero[0].length][i%matrizTablero[0].length] + ' ';
-			if (i%matrizTablero[0].length == matrizTablero[0].length - 1) {
-				str = str + '\n';
-			}
-		}
-		return str;
-	}
-//verificar colicion segun la pocision de la icha
 	public boolean existsColision(Ficha ficha) {
 		// TODO Auto-generated method stub
 		boolean result = false;
@@ -138,17 +132,17 @@ public class Tablero extends Sprite{
 	
 		int im = (int) (positionFicha.getX() / medidaLado);
 		int jm = (int) (positionFicha.getY() / medidaLado);
+		
+		System.out.println("existsColision");
+		System.out.println(this);
+		System.out.println(ficha);
+		System.out.println("im "+ im + " jm "+jm + " posicion X " + positionFicha.getX() + " posicion Y " + positionFicha.getY());
+		
+		
 		//System.out.println(im+" "+jm);
 	
-		for(int i=0; i< matrizTablero.length; i++)
-		{
-			for(int j=0; j< matrizTablero[0].length;j++)
-			{
-				System.out.print(matrizTablero[i][j] + " ");
-			}
-			System.out.println();
-		}
-		System.out.println("im "+ im + " jm "+jm + " posicion X " + positionFicha.getX() + " posicion Y " + positionFicha.getY());
+	//	System.out.println(this);
+		//System.out.println("im "+ im + " jm "+jm + " posicion X " + positionFicha.getX() + " posicion Y " + positionFicha.getY());
 		
 		int [][] matriz = ficha.getFicha();
 		
@@ -164,6 +158,33 @@ public class Tablero extends Sprite{
 		return result;
 
 	}
+	
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString(){
+
+		String str = new String();
+	/*	for (int i = 0; i < matrizTablero.length*matrizTablero[0].length; i++) {
+			
+			int aux = (matrizTablero[i/matrizTablero[0].length][i%matrizTablero[0].length]!= 0 ?1:0 );
+			str = str +  aux+ ' ';
+			if (i%matrizTablero[0].length == matrizTablero[0].length - 1) {
+				str = str + '\n';
+			}
+		}*/
+		
+		for (int i = 0; i < matrizTablero.length; i++) {
+			for (int j = 0; j < matrizTablero[0].length; j++) {
+				int aux = (matrizTablero[i][j]!= 0 ?1:0 );
+				str = str +  aux+ ' ';
+			}
+			str = str + '\n';
+		}
+		return str;
+	}
+//verificar colicion segun la pocision de la icha
 	
 	
 	

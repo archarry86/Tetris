@@ -212,29 +212,29 @@ public class GenericGame extends AbstractGame implements GameContext {
 			// System.out.println(j.toString());
 			j.tablero.agregarFicha(ficha);
 			// System.out.println(j.toString());
+			// TODO QUEMADO
 
+			val = (val++ % 8) + 1;
+			//recargar la ficha
+			int FichaInicial = val;
+			ficha.ReloadFicha(FichaInicial);
+			
+			//test
+			cols ++;
+			cols = cols % (Juego.COLUMNAS);
+			System.out.println(cols * getMedidaLado());
+			ficha.position= new Vector2D(cols * getMedidaLado(),ficha.position.getY());
+			System.out.println("ficha recargada "+ficha);
+			girar();
+			System.out.println("ficha girada "+ficha);
+			
+			// si exite colision al crear la nieva ficha
+			if(	j.tablero.existsColision(ficha))
+				j.tablero.reloadMatriz();
 		}
 
-		// TODO QUEMADO
-
-		val = (val++ % 8) + 1;
-		// val= 2;
-		int FichaInicial = val;
-		ficha.ReloadFicha(FichaInicial);
 		
-		//test
-		cols ++;
-		cols = cols % (Juego.COLUMNAS);
-		System.out.println(cols * getMedidaLado());
-		ficha.position= new Vector2D(cols * getMedidaLado(),ficha.position.getY());
-		girar();
-		// si exite colision al crear la nieva ficha
-	if(	j.tablero.existsColision(ficha))
-		j.tablero.reloadMatriz();
-		// System.out.println(" FichaInicial " + FichaInicial);
-		
-		//
-
+	
 	}
 
 	@Override
@@ -286,7 +286,7 @@ public class GenericGame extends AbstractGame implements GameContext {
    //TEST METODS
 	
 	public void girar(){
-		int i =3;  
+		int i =new Random().nextInt(9)+1;  
 		for(int j= 0;j< i;j++)
 			ficha.rotate();
 		

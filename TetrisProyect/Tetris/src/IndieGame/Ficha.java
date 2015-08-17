@@ -71,12 +71,13 @@ public class Ficha extends  Sprite {
 	public Ficha(int forma,int colorc){//, GameContext contexto ){
 		
 		super();
+		orientation = 0;
 		medidalado = GenericGame.getMedidaLado();
 	
 		//position = new Vector2D();		
 		position = new Vector2D((GenericGame.Width/2) - medidalado , 0);
 		direction = new Vector2D(medidalado, 0);
-		Random r = new Random();
+		
 		int vcolor = colorc;
 		color = new Color( vcolor);
 	
@@ -196,7 +197,7 @@ public class Ficha extends  Sprite {
 	public Ficha(int forma){//, GameContext contexto ){
 		
 		super();
-	
+		orientation = 0;
 		medidalado = GenericGame.getMedidaLado();
 	
 		//position = new Vector2D();		
@@ -344,14 +345,14 @@ public class Ficha extends  Sprite {
 				}
 			}
 		*/			
-			
+			System.out.println("FICHA COPIADA "+f);
 		return f;
 	}
 	
 	public void  ReloadFicha(int forma){//, GameContext contexto ){
 			
 			
-		
+			orientation = 0;
 			medidalado =  GenericGame.Width / Juego.COLUMNAS;
 		
 			//position = new Vector2D();		
@@ -483,6 +484,7 @@ public class Ficha extends  Sprite {
 	}
 	
 	public void rotate(){
+		System.out.println(" rotate ");
 		orientation++;
 		orientation = orientation % 4;
 		
@@ -495,10 +497,13 @@ public class Ficha extends  Sprite {
 		colsMatrizL = aux;
 				
 		int temp = (int)position.getX() + _width;
+		System.out.println(temp+" comparacion "+ GenericGame.Width);
 		if (temp > GenericGame.Width){
-			
-			Vector2D v = new Vector2D(temp - GenericGame.Width,0).Multiply(-1);			
-			position = Vector2D.Add(position, v);			  
+		
+			Vector2D v = new Vector2D(temp - GenericGame.Width,0).Multiply(-1);	
+			System.out.println("ini correccion "+ position);
+			position = Vector2D.Add(position, v);
+			System.out.println("fin correccion "+ position);
 		}
 		
 	}
@@ -549,16 +554,28 @@ public class Ficha extends  Sprite {
 	}
 	
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	public String toString(){
 		int[][] maux = getFicha();
 		
 		String fichaString = new String();
-		for (int i = 0; i < filasMatrizL*colsMatrizL; i++) {
+	/*	for (int i = 0; i < filasMatrizL*colsMatrizL; i++) {
 			fichaString = fichaString +  (maux[i/colsMatrizL][i%colsMatrizL]!= 0?1:0 )+ ' ';
 			if (i%colsMatrizL == colsMatrizL - 1) {
 				fichaString = fichaString + '\n';
 			}
+		}*/
+		fichaString ="tipo "+tipo+" orientacion "+orientation+ '\n';
+		for (int i = 0; i < maux.length; i++) {
+
+			for (int j = 0; j < maux[0].length; j++) {
+				fichaString = fichaString +  (maux[i][j]!= 0?1:0 )+ ' ';
+			}
+			fichaString = fichaString + '\n';
 		}
+		
 		return fichaString;
 	}
 	
@@ -576,12 +593,14 @@ public class Ficha extends  Sprite {
 		
 		//info
 		Vector2D vector = position.Copy().Div(medidalado);
-		
+		//game compoent
+		//
 		g.setColor(Color.RED);
 		
 		g.drawString(vector.toString(), (int)position.getX(), (int)position.getY()-10);
+		//
 		
-		
+		//gamecomponet
 		 vector = position.Copy();
 		
 		switch (orientation) {
@@ -672,7 +691,7 @@ public class Ficha extends  Sprite {
 				}
 				break;
 		}
-		
+		//
 		
 		
 		
