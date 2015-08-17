@@ -67,6 +67,132 @@ public class Ficha extends  Sprite {
 	 * 8  [][][] 
 	 * 	  []  []  
 	 * */
+	
+	public Ficha(int forma,int colorc){//, GameContext contexto ){
+		
+		super();
+		medidalado = GenericGame.getMedidaLado();
+	
+		//position = new Vector2D();		
+		position = new Vector2D((GenericGame.Width/2) - medidalado , 0);
+		direction = new Vector2D(medidalado, 0);
+		Random r = new Random();
+		int vcolor = colorc;
+		color = new Color( vcolor);
+	
+		tipo = forma;
+		
+		
+		switch (forma) {
+		case TIPO1:
+			
+			filasMatrizL = 1;
+			colsMatrizL = 1;
+			matrizFicha = new int[filasMatrizL][colsMatrizL];
+			this._height = medidalado* matrizFicha.length;
+			this._width=medidalado* matrizFicha.length;
+			
+			matrizFicha[0][0] = vcolor;
+			
+			break;
+		case TIPO2:
+			filasMatrizL = 2;
+			colsMatrizL = 3;
+			matrizFicha = new int[filasMatrizL][colsMatrizL];
+			this._height = medidalado* 2;//matrizFicha.length;
+			this._width=medidalado* 3;//matrizFicha.length;
+			
+			
+			matrizFicha[0][0] = vcolor;			
+			matrizFicha[1][0] = vcolor;
+			matrizFicha[1][1] = vcolor;
+			matrizFicha[1][2] = vcolor;
+			
+			break;
+		case TIPO3:
+			filasMatrizL = 2;
+			colsMatrizL = 3;
+			matrizFicha = new int[filasMatrizL][colsMatrizL];
+			this._height = medidalado* 2;//matrizFicha.length;
+			this._width=medidalado* 3;//matrizFicha.length;
+			
+			matrizFicha[0][0] = vcolor;			
+			matrizFicha[0][1] = vcolor;
+			matrizFicha[1][1] = vcolor;
+			matrizFicha[1][2] = vcolor;
+			
+			break;
+		case TIPO4:
+			filasMatrizL = 2;
+			colsMatrizL = 3;
+			matrizFicha = new int[filasMatrizL][colsMatrizL];
+			this._height = medidalado* 2;//matrizFicha.length;
+			this._width=medidalado* 3;//matrizFicha.length;
+			
+			matrizFicha[0][2] = vcolor;			
+			matrizFicha[0][1] = vcolor;
+			matrizFicha[1][0] = vcolor;
+			matrizFicha[1][1] = vcolor;
+			break;
+		case TIPO5:
+			
+			filasMatrizL = 1;
+			colsMatrizL = 4;
+			matrizFicha = new int[filasMatrizL][colsMatrizL];
+			this._height = medidalado* 1;//matrizFicha.length;
+			this._width=medidalado* 4;//matrizFicha.length;			
+			
+			matrizFicha[0][0] = vcolor;			
+			matrizFicha[0][1] = vcolor;
+			matrizFicha[0][2] = vcolor;
+			matrizFicha[0][3] = vcolor;
+			break;
+		case TIPO6:
+			
+			filasMatrizL = 2;
+			colsMatrizL = 3;
+			matrizFicha = new int[filasMatrizL][colsMatrizL];
+			this._height = medidalado* 2;//matrizFicha.length;
+			this._width=medidalado* 3;//matrizFicha.length;			
+			
+			matrizFicha[0][1] = vcolor;			
+			matrizFicha[1][0] = vcolor;
+			matrizFicha[1][1] = vcolor;
+			matrizFicha[1][2] = vcolor;
+			break;
+		case TIPO7:
+			
+			filasMatrizL = 2;
+			colsMatrizL = 2;
+			matrizFicha = new int[filasMatrizL][colsMatrizL];
+			this._height = medidalado* 2;//matrizFicha.length;
+			this._width=medidalado* 2;//matrizFicha.length;
+			matrizFicha[0][0] = vcolor;	
+			matrizFicha[0][1] = vcolor;
+			matrizFicha[1][0] = vcolor;
+			matrizFicha[1][1] = vcolor;
+			break;
+		case TIPO8:
+			
+			filasMatrizL = 2;
+			colsMatrizL = 3;
+			matrizFicha = new int[filasMatrizL][colsMatrizL];
+			this._height = medidalado* 2;//matrizFicha.length;
+			this._width=medidalado* 3;//matrizFicha.length;			
+			
+			matrizFicha[0][0] = vcolor;			
+			matrizFicha[0][1] = vcolor;
+			matrizFicha[0][2] = vcolor;
+			matrizFicha[1][0] = vcolor;
+			matrizFicha[1][2] = vcolor;
+			break;
+			
+		default:
+			break;
+		}		
+	}
+		
+	
 	public Ficha(int forma){//, GameContext contexto ){
 		
 		super();
@@ -193,13 +319,14 @@ public class Ficha extends  Sprite {
 	}	 	
 	
 	public Ficha Copy(){
-		Ficha f = new Ficha(tipo);
-		f.colsMatrizL = colsMatrizL;
-		f.filasMatrizL = filasMatrizL;
-		f.direction = direction;
+		Ficha f = new Ficha(tipo, color.getRGB());
+		f._contexto = _contexto;
 		
-		f.matrizFicha = matrizFicha;
-		f.position = position;
+		for(int i = 0;i<orientation;i++){
+			f.rotate();
+		}
+		
+		
 		/*new int[filasMatrizL][colsMatrizL];
 		
 			for(int i = 0; i< filasMatrizL ;i++ ){
@@ -337,19 +464,7 @@ public class Ficha extends  Sprite {
 				break;
 			}		
 		}	 	
-	/**
-	 * @param forma
-	 * @return
-	 */
-	/**
-	 * @param forma
-	 * @return
-	 */
-	public static Ficha FactoryFicha(int forma){
-		Ficha f= null;
-
-		return f;
-	}
+	
 	public void move(int scalar) {
 		Vector2D 	newposition = Vector2D.Add(position, direction.Multiply(scalar));
 		boolean flag =newposition.getX() >= 0 &&  newposition.getX()+_width <= AbstractGame.Width ;

@@ -193,6 +193,9 @@ public class GenericGame extends AbstractGame implements GameContext {
 		int FichaInicial = val;
 		ficha.ReloadFicha(FichaInicial);
 		girar();
+		// si exite colision al crear la nieva ficha
+	if(	j.tablero.existsColision(ficha))
+		j.tablero.reloadMatriz();
 		// System.out.println(" FichaInicial " + FichaInicial);
 		
 		//
@@ -248,7 +251,7 @@ public class GenericGame extends AbstractGame implements GameContext {
    //TEST METODS
 	
 	public void girar(){
-		int i =3;
+		int i =4;
 		for(int j= 0;j< i;j++)
 			ficha.rotate();
 		

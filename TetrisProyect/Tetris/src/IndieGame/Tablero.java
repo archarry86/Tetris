@@ -28,6 +28,13 @@ public class Tablero extends Sprite{
 			for (int j = 0; j < m.length; j++) 
 				matrizTablero[i][j] = m[i][j];	
 	}
+	
+	public void reloadMatriz(){
+		int c =GenericGame.Width / GenericGame.getMedidaLado();
+		int f =GenericGame.Height / GenericGame.getMedidaLado();
+	
+		matrizTablero = new int[f][c];
+	}
 
 	@Override
 	protected Shape getShape() {
