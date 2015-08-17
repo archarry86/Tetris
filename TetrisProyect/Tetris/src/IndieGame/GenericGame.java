@@ -16,71 +16,56 @@ import javax.imageio.ImageIO;
 
 import Math.Vector2D;
 
+public class GenericGame extends AbstractGame implements GameContext {
 
-public class GenericGame extends AbstractGame implements GameContext{
+	private volatile Juego j = null;
+	private volatile Ficha ficha = null;
 
-	
-	private Juego j = null;
-	private Ficha ficha = null;
-	
-	public GenericGame(){
+	public GenericGame() {
 		super();
-	
-		
-		//addKeyListener(this);
+
+		// addKeyListener(this);
 		j = new Juego();
-		
-		//Inicializar una lista
-		//TODO PASAR CREACION DE FICHAS A UN FACTORY
-		Random r = new Random();
-		
-		int FichaInicial = (int)(r.nextDouble() * 7) + 1;
-				
-		ficha = new Ficha(FichaInicial);
-		ficha._contexto = this;
-		//ficha._pto = 
-		
+
+		// Inicializar una lista
+		// TODO PASAR CREACION DE FICHAS A UN FACTORY
+		ficha = FactoryFichaRandom(this);
 		//
-		lista.add(ficha);//, this)); 
+		//TODO TEST
+		girar();
+		
+		lista.add(ficha);// , this));
 		lista.add(j.tablero);
 
-	
-   }
-	
-	
+	}
 
-	
 	@Override
 	public void Update() {
 		// TODO Auto-generated method stub
-		for(Sprite s:this.lista){
+		for (Sprite s : this.lista) {
 			s.update();
 		}
-		
-		
+
 	}
 
 	@Override
 	public void gameRender() {
 		// TODO Auto-generated method stub
-    	Graphics2D g=(Graphics2D) buffer.getGraphics();
-    	/*g.setColor(Color.WHITE);
-    	g.fillRect(0, 0, Whidt,Height);
-    	*/
-        	
-    	g.setColor(Color.WHITE);
-    	g.fillRect(0, 0, GenericGame.Width,GenericGame.Height);    	
-    	
-    	
-    	for(Sprite s:this.lista){
+		Graphics2D g = (Graphics2D) buffer.getGraphics();
+		/*
+		 * g.setColor(Color.WHITE); g.fillRect(0, 0, Whidt,Height);
+		 */
+
+		g.setColor(Color.WHITE);
+		g.fillRect(0, 0, GenericGame.Width, GenericGame.Height);
+
+		for (Sprite s : this.lista) {
 			s.draw(g);
 		}
-    	
-    	reportarEstadisticas(g);
-    	
+
+		reportarEstadisticas(g);
+
 	}
-
-
 
 	@Override
 	public void keyPressed(KeyEvent arg0) {
@@ -95,22 +80,22 @@ public class GenericGame extends AbstractGame implements GameContext{
 			break;
 		case KeyEvent.VK_SPACE:
 			ficha.rotate();
-		//	System.out.println(ficha.toString());
+			// System.out.println(ficha.toString());
 			break;
-		} 
-		
+		}
+
 	}
 
 	@Override
 	public void keyReleased(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -152,12 +137,12 @@ public class GenericGame extends AbstractGame implements GameContext{
 	@Override
 	public boolean colisiono(Sprite s) {
 		// TODO Auto-generated method stub
-	//	for(int i=0;i<)
-		boolean result= false;
-		for(int i=0;i<lista.size()&&!result;i++){
-			Sprite saux= lista.get(i);
-			if(!saux.equals(s)){
-				result=	saux.getShape().intersects(s.getShape().getBounds2D());
+		// for(int i=0;i<)
+		boolean result = false;
+		for (int i = 0; i < lista.size() && !result; i++) {
+			Sprite saux = lista.get(i);
+			if (!saux.equals(s)) {
+				result = saux.getShape().intersects(s.getShape().getBounds2D());
 			}
 		}
 		return result;
@@ -166,73 +151,64 @@ public class GenericGame extends AbstractGame implements GameContext{
 	@Override
 	public void paintScreen() {
 		// TODO Auto-generated method stub
-		
-	    	Graphics2D g=(Graphics2D) getGraphics();
-	    	
-	    	g.drawRect(18, 18, GenericGame.Width+3, GenericGame.Height+3);
-	    	g.drawRect(19, 19, GenericGame.Width+1, GenericGame.Height+1);
-	    	
-	    	g.drawImage(buffer,20,20,this);
-	    
-		
+
+		Graphics2D g = (Graphics2D) getGraphics();
+
+		g.drawRect(18, 18, GenericGame.Width + 3, GenericGame.Height + 3);
+		g.drawRect(19, 19, GenericGame.Width + 1, GenericGame.Height + 1);
+
+		g.drawImage(buffer, 20, 20, this);
+
 	}
 
 	@Override
 	public Vector2D getGravedad() {
 		// TODO Auto-generated method stub
-		int medidalado =  GenericGame.Width / Juego.COLUMNAS;
+		int medidalado = GenericGame.Width / Juego.COLUMNAS;
 		return new Vector2D(0, medidalado);
 	}
-	
-	public static int getMedidaLado(){
-		return GenericGame.Width / Juego.COLUMNAS;	
+
+	public static int getMedidaLado() {
+		return GenericGame.Width / Juego.COLUMNAS;
 	}
-	
-  //TODO ATRIBUTO MODEO TEXT
-	int val = 6;
+
+	// TODO ATRIBUTO MODEO TEXT
+
+    private volatile int  val =0;
 	@Override
 	public void SendMessage(Object obj, String Message) {
 		// TODO Auto-generated method stub
-		
-		
-		if(Message.equals(Ficha.UBICARFICHA))
-		{
-			//System.out.println(j.toString());	
+
+		if (Message.equals(Ficha.UBICARFICHA)) {
+			// System.out.println(j.toString());
 			j.tablero.agregarFicha(ficha);
-			//System.out.println(j.toString());	
-			
+			// System.out.println(j.toString());
+
 		}
-		
-//TODO QUEMADO
-		
-		val =  (val++ %8) + 1;
-		//val= 2;
-		int FichaInicial =val;
-		ficha.ReloadFicha(val);
 
-		//System.out.println(" FichaInicial " + FichaInicial);	
-		ficha._contexto = this;
+		// TODO QUEMADO
+
+		val = (val++ % 8) + 1;
+		// val= 2;
+		int FichaInicial = val;
+		ficha.ReloadFicha(FichaInicial);
+		girar();
+		// System.out.println(" FichaInicial " + FichaInicial);
+		
 		//
-		
-		
+
 	}
-
-
-
 
 	@Override
 	public boolean SendGetMessageBool(Object obj, String Message) {
 		// TODO Auto-generated method stub
 		boolean result = false;
-		if(Message.equals(Ficha.DETECT_COLISION)){
-			
-			result = j.tablero.existsColision((Ficha)obj);
+		if (Message.equals(Ficha.DETECT_COLISION)) {
+
+			result = j.tablero.existsColision((Ficha) obj);
 		}
 		return result;
 	}
-
-
-
 
 	@Override
 	public String SendGetMessageString(Object obj, String Message) {
@@ -240,9 +216,41 @@ public class GenericGame extends AbstractGame implements GameContext{
 		return null;
 	}
 
-
-
-
+	@Override
+	public Tablero getTablero() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
+	public static Ficha FactoryFichaRandom(GameContext c){
+		Random r = new Random();
 
+		int FichaInicial = (int) (r.nextDouble() * 7) + 1;
+
+		Ficha ficha = new Ficha(FichaInicial);
+		ficha._contexto = c;
+		return ficha;
+	}
+	static volatile int stval = 6;
+	public static Ficha FactoryFichaSecuencial(GameContext c){
+		
+
+		stval = (stval++ % 8) + 1;
+		// val= 2;
+		int FichaInicial = stval;
+		
+
+		Ficha ficha = new Ficha(FichaInicial);
+		ficha._contexto = c;
+		return ficha;
+	}
+	
+   //TEST METODS
+	
+	public void girar(){
+		int i =3;
+		for(int j= 0;j< i;j++)
+			ficha.rotate();
+		
+	}
 }

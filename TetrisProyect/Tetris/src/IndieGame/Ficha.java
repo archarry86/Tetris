@@ -19,7 +19,7 @@ public class Ficha extends  Sprite {
 	public final static int TIPO7 = 7;
 	public final static int TIPO8 = 8;
 	
-	public final static String UBICARFICHA = "UBICAR_FICHA";
+	public final static String UBICARFICHA = "UBICARFICHA";
 	public final static String DETECT_COLISION = "DETECT_COLISION";
 	
 	protected Color color = null;
@@ -235,8 +235,8 @@ public class Ficha extends  Sprite {
 				filasMatrizL = 1;
 				colsMatrizL = 1;
 				matrizFicha = new int[filasMatrizL][colsMatrizL];
-				this._height = medidalado* matrizFicha.length;
-				this._width=medidalado* matrizFicha.length;
+				this._height = medidalado* filasMatrizL;
+				this._width=medidalado* filasMatrizL;
 				
 				matrizFicha[0][0] = vcolor;
 				
@@ -245,8 +245,8 @@ public class Ficha extends  Sprite {
 				filasMatrizL = 2;
 				colsMatrizL = 3;
 				matrizFicha = new int[filasMatrizL][colsMatrizL];
-				this._height = medidalado* 2;//matrizFicha.length;
-				this._width=medidalado* 3;//matrizFicha.length;
+				this._height = medidalado* filasMatrizL;//matrizFicha.length;
+				this._width=medidalado* colsMatrizL;//matrizFicha.length;
 				
 				
 				matrizFicha[0][0] = vcolor;			
@@ -259,8 +259,8 @@ public class Ficha extends  Sprite {
 				filasMatrizL = 2;
 				colsMatrizL = 3;
 				matrizFicha = new int[filasMatrizL][colsMatrizL];
-				this._height = medidalado* 2;//matrizFicha.length;
-				this._width=medidalado* 3;//matrizFicha.length;
+				this._height = medidalado* filasMatrizL;//matrizFicha.length;
+				this._width=medidalado* colsMatrizL;//matrizFicha.length;
 				
 				matrizFicha[0][0] = vcolor;			
 				matrizFicha[0][1] = vcolor;
@@ -272,8 +272,8 @@ public class Ficha extends  Sprite {
 				filasMatrizL = 2;
 				colsMatrizL = 3;
 				matrizFicha = new int[filasMatrizL][colsMatrizL];
-				this._height = medidalado* 2;//matrizFicha.length;
-				this._width=medidalado* 3;//matrizFicha.length;
+				this._height = medidalado* filasMatrizL;//matrizFicha.length;
+				this._width=medidalado* colsMatrizL;//matrizFicha.length;
 				
 				matrizFicha[0][2] = vcolor;			
 				matrizFicha[0][1] = vcolor;
@@ -285,8 +285,8 @@ public class Ficha extends  Sprite {
 				filasMatrizL = 1;
 				colsMatrizL = 4;
 				matrizFicha = new int[filasMatrizL][colsMatrizL];
-				this._height = medidalado* 1;//matrizFicha.length;
-				this._width=medidalado* 4;//matrizFicha.length;			
+				this._height = medidalado* filasMatrizL;//matrizFicha.length;
+				this._width=medidalado* colsMatrizL;//matrizFicha.length;			
 				
 				matrizFicha[0][0] = vcolor;			
 				matrizFicha[0][1] = vcolor;
@@ -298,8 +298,8 @@ public class Ficha extends  Sprite {
 				filasMatrizL = 2;
 				colsMatrizL = 3;
 				matrizFicha = new int[filasMatrizL][colsMatrizL];
-				this._height = medidalado* 2;//matrizFicha.length;
-				this._width=medidalado* 3;//matrizFicha.length;			
+				this._height = medidalado* filasMatrizL;//matrizFicha.length;
+				this._width=medidalado* colsMatrizL;//matrizFicha.length;			
 				
 				matrizFicha[0][1] = vcolor;			
 				matrizFicha[1][0] = vcolor;
@@ -311,8 +311,8 @@ public class Ficha extends  Sprite {
 				filasMatrizL = 2;
 				colsMatrizL = 2;
 				matrizFicha = new int[filasMatrizL][colsMatrizL];
-				this._height = medidalado* 2;//matrizFicha.length;
-				this._width=medidalado* 2;//matrizFicha.length;
+				this._height = medidalado* filasMatrizL;//matrizFicha.length;
+				this._width=medidalado* colsMatrizL;//matrizFicha.length;
 				matrizFicha[0][0] = vcolor;	
 				matrizFicha[0][1] = vcolor;
 				matrizFicha[1][0] = vcolor;
@@ -323,8 +323,8 @@ public class Ficha extends  Sprite {
 				filasMatrizL = 2;
 				colsMatrizL = 3;
 				matrizFicha = new int[filasMatrizL][colsMatrizL];
-				this._height = medidalado* 2;//matrizFicha.length;
-				this._width=medidalado* 3;//matrizFicha.length;			
+				this._height = medidalado* filasMatrizL;//matrizFicha.length;
+				this._width=medidalado* colsMatrizL;//matrizFicha.length;			
 				
 				matrizFicha[0][0] = vcolor;			
 				matrizFicha[0][1] = vcolor;
@@ -600,7 +600,7 @@ public class Ficha extends  Sprite {
 	boolean resul = 	auxposition.getY() > GenericGame.Height- _height ||_contexto.SendGetMessageBool(cp, Ficha.DETECT_COLISION) ;
 		if( resul ){
 			//TODO metodo de ejemplo
-			_contexto.SendMessage(this, "UBICAR_FICHA");			
+			_contexto.SendMessage(this, Ficha.UBICARFICHA);			
 		}
 		else{
 			

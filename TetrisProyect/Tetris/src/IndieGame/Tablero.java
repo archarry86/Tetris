@@ -142,7 +142,7 @@ public class Tablero extends Sprite{
 	
 		int im = (int) (positionFicha.getX() / medidaLado);
 		int jm = (int) (positionFicha.getY() / medidaLado);
-		System.out.println(im+" "+jm);
+		//System.out.println(im+" "+jm);
 	
 		
 		

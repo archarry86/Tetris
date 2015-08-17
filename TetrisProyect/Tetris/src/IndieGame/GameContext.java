@@ -50,6 +50,7 @@ public interface GameContext {
 	
 	public abstract Vector2D getGravedad();
 	
+	public abstract Tablero getTablero();
 	
 	public abstract void SendMessage(Object obj, String Message);
 	
