@@ -95,22 +95,14 @@ public class Tablero extends Sprite{
 		//System.out.println("I"+i);
 		
 	}
-	
+	///se esta seguro que se colicion con le tablero o con el limite
 	public void agregarFicha(Ficha ficha){
 		
 		Vector2D positionFicha = ficha.position;
 		int medidaLado = GenericGame.getMedidaLado();
-		
-		//System.out.println("medidaLado " + medidaLado);
-		
+				
 		int im = (int) (positionFicha.getX() / medidaLado);
 		int jm = (int) (positionFicha.getY() / medidaLado);
-		
-		//System.out.println("im " + im + " ijm " + jm);
-		
-		//System.out.println();
-		
-		
 		
 		int [][] matriz = ficha.getFicha();
 		
@@ -123,9 +115,6 @@ public class Tablero extends Sprite{
 				matrizTablero[jm+i][im+j]= matriz[i][j];
 			}
 		}
-
-		
-		
 	}
 	
 	public String toString(){
@@ -139,7 +128,7 @@ public class Tablero extends Sprite{
 		}
 		return str;
 	}
-
+//verificar colicion segun la pocision de la icha
 	public boolean existsColision(Ficha ficha) {
 		// TODO Auto-generated method stub
 		boolean result = false;
@@ -151,7 +140,15 @@ public class Tablero extends Sprite{
 		int jm = (int) (positionFicha.getY() / medidaLado);
 		//System.out.println(im+" "+jm);
 	
-		
+		for(int i=0; i< matrizTablero.length; i++)
+		{
+			for(int j=0; j< matrizTablero[0].length;j++)
+			{
+				System.out.print(matrizTablero[i][j] + " ");
+			}
+			System.out.println();
+		}
+		System.out.println("im "+ im + " jm "+jm + " posicion X " + positionFicha.getX() + " posicion Y " + positionFicha.getY());
 		
 		int [][] matriz = ficha.getFicha();
 		

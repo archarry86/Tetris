@@ -203,9 +203,11 @@ public class Ficha extends  Sprite {
 		position = new Vector2D((GenericGame.Width/2) - medidalado , 0);
 		direction = new Vector2D(medidalado, 0);
 		Random r = new Random();
-		int vcolor = r.nextInt();
+		int vcolor = (r.nextInt(9) + 1);
+		
+		vcolor = 6;
 		color = new Color( vcolor);
-	
+	//System.out.println("color "+vcolor);
 		tipo = forma;
 		
 		
@@ -249,6 +251,12 @@ public class Ficha extends  Sprite {
 			
 			break;
 		case TIPO4:
+			
+			
+			/*      [][]    
+			 * 4  [][]  
+			 */
+			
 			filasMatrizL = 2;
 			colsMatrizL = 3;
 			matrizFicha = new int[filasMatrizL][colsMatrizL];
@@ -546,7 +554,7 @@ public class Ficha extends  Sprite {
 		
 		String fichaString = new String();
 		for (int i = 0; i < filasMatrizL*colsMatrizL; i++) {
-			fichaString = fichaString +  maux[i/colsMatrizL][i%colsMatrizL] + ' ';
+			fichaString = fichaString +  (maux[i/colsMatrizL][i%colsMatrizL]!= 0?1:0 )+ ' ';
 			if (i%colsMatrizL == colsMatrizL - 1) {
 				fichaString = fichaString + '\n';
 			}
@@ -708,6 +716,23 @@ public class Ficha extends  Sprite {
 
 	@Override
 	protected void update() {
+		////
+		if (Input.FLECHA_DERECHA) {
+			move(1);
+		}
+		else if (Input.FLECHA_IZQUIERDA) {
+			move(-1);
+		}
+		if (Input.ROTACION) {
+			rotate();
+		}
+		
+		if (Input.FLECHA_ABAJO > 0) {
+			;
+		}
+		///
+		
+		//// rogidbody
 		// TODO Auto-generated method stub
 	Vector2D	auxposition = Vector2D.Add(position, _contexto.getGravedad());
  	Ficha cp = this.Copy();
@@ -722,6 +747,7 @@ public class Ficha extends  Sprite {
 			position = auxposition;
 			
 		}
+		///
 		
 	}
 	

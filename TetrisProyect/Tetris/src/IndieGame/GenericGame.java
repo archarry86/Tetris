@@ -73,14 +73,25 @@ public class GenericGame extends AbstractGame implements GameContext {
 
 		switch (arg0.getKeyCode()) {
 		case KeyEvent.VK_LEFT:
-			ficha.move(-1);
+			//ficha.move(-1);
+			Input.FLECHA_DERECHA = false;
+			Input.FLECHA_IZQUIERDA = true;
 			break;
 		case KeyEvent.VK_RIGHT:
-			ficha.move(1);
+			//ficha.move(1);
+			Input.FLECHA_DERECHA = true;
+			Input.FLECHA_IZQUIERDA = false;
 			break;
 		case KeyEvent.VK_SPACE:
-			ficha.rotate();
+			//ficha.rotate();
 			// System.out.println(ficha.toString());
+			Input.ROTACION = true;
+			break;
+		case  KeyEvent.VK_DOWN:
+			
+			Input.FLECHA_ABAJO += 0.001;
+			if(Input.FLECHA_ABAJO > 1)
+				Input.FLECHA_ABAJO = 1;
 			break;
 		}
 
@@ -89,7 +100,24 @@ public class GenericGame extends AbstractGame implements GameContext {
 	@Override
 	public void keyReleased(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-
+		switch (arg0.getKeyCode()) {
+		case  KeyEvent.VK_DOWN:			
+			Input.FLECHA_ABAJO -= 0.001;
+			if(Input.FLECHA_ABAJO < 0)
+				Input.FLECHA_ABAJO = 0;
+			break;			
+		case KeyEvent.VK_LEFT:			
+			Input.FLECHA_IZQUIERDA = false;
+			break;
+		case KeyEvent.VK_RIGHT:			
+			Input.FLECHA_DERECHA = false;			
+			break;
+		case KeyEvent.VK_SPACE:
+			//ficha.rotate();
+			// System.out.println(ficha.toString());
+			Input.ROTACION = false;
+			break;
+		}
 	}
 
 	@Override
@@ -175,6 +203,7 @@ public class GenericGame extends AbstractGame implements GameContext {
 	// TODO ATRIBUTO MODEO TEXT
 
     private volatile int  val =0;
+    private volatile int cols = 0;
 	@Override
 	public void SendMessage(Object obj, String Message) {
 		// TODO Auto-generated method stub
@@ -192,6 +221,12 @@ public class GenericGame extends AbstractGame implements GameContext {
 		// val= 2;
 		int FichaInicial = val;
 		ficha.ReloadFicha(FichaInicial);
+		
+		//test
+		cols ++;
+		cols = cols % (Juego.COLUMNAS);
+		System.out.println(cols * getMedidaLado());
+		ficha.position= new Vector2D(cols * getMedidaLado(),ficha.position.getY());
 		girar();
 		// si exite colision al crear la nieva ficha
 	if(	j.tablero.existsColision(ficha))
@@ -251,7 +286,7 @@ public class GenericGame extends AbstractGame implements GameContext {
    //TEST METODS
 	
 	public void girar(){
-		int i =4;
+		int i =3;  
 		for(int j= 0;j< i;j++)
 			ficha.rotate();
 		

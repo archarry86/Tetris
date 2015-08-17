@@ -5,18 +5,23 @@ import Vista.Frame;
 public class Main {
 
 	public static void main(String[] args) {
-		
-		
-		
-		Ficha ficha = new Ficha(2);
-		//System.out.println(	ficha);
-		ficha.rotate();
-		//System.out.println(	ficha);
-		ficha.rotate();
-		//System.out.println(	ficha);
-		ficha.rotate();
-		//System.out.println(	ficha);
 	
+		
+	for(int i = 1; i<9;i++)	 {
+		
+		System.out.println("FICHA "+i);
+		Ficha ficha = new Ficha(i);
+		System.out.println(	ficha);
+		ficha.rotate();
+		System.out.println(	ficha);
+		ficha.rotate();
+		System.out.println(	ficha);
+		ficha.rotate();
+		System.out.println(	ficha);
+		
+		ficha.rotate();
+		System.out.println(	ficha);
+	}	
 	
 		/*
 		for (int i = 0; i < 4; i++)
