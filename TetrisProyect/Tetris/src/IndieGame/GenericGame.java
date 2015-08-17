@@ -263,7 +263,7 @@ public class GenericGame extends AbstractGame implements GameContext {
 	public static Ficha FactoryFichaRandom(GameContext c){
 		Random r = new Random();
 
-		int FichaInicial = (int) (r.nextDouble() * 7) + 1;
+		int FichaInicial = (int) (r.nextInt(7)) + 1;
 
 		Ficha ficha = new Ficha(FichaInicial);
 		ficha._contexto = c;
