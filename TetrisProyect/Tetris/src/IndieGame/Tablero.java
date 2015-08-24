@@ -283,16 +283,23 @@ public class Tablero extends Sprite{
 			{								
 				for (int indice = i; indice > 0; indice--) 
 				{
-					boolean filaVacia = true;
+					int c = 0;
+					boolean filaVacia = false;
 					for (int j = 0; j < matrizTablero[0].length; j++) 
 					{
 						//matrizTablero[i][j] = 0;
 						matrizTablero[indice][j] = matrizTablero[indice-1][j]; 
 						if (matrizTablero[indice-1][j] != 0) 
-							filaVacia = false;
+							c++;
+						if (j == matrizTablero[0].length - 1) { // ultima columna de la fila
+							if (c == 0) {//La fila esta llena de 0 
+								filaVacia = true;
+								break;							
+							}
+						}
 					}
 					if (filaVacia) 
-						break;
+						break;					
 				}
 			}
 		}
