@@ -9,13 +9,13 @@ public class Main {
 		
 	for(int i = 1; i<9;i++)	 {
 		
-		System.out.println("FICHA "+i);
+		//System.out.println("FICHA "+i);
 		Ficha ficha = new Ficha(i);
-		System.out.println(	ficha);
+		//System.out.println(	ficha);
 		ficha.rotate();
-		System.out.println(	ficha);
+		//System.out.println(	ficha);
 		ficha.rotate();
-		System.out.println(	ficha);
+		//System.out.println(	ficha);
 		ficha.rotate();
 		System.out.println(	ficha);
 		

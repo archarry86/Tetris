@@ -222,14 +222,14 @@ public class GenericGame extends AbstractGame implements GameContext {
 			//test
 			cols ++;
 			cols = cols % (Juego.COLUMNAS);
-			System.out.println(cols * getMedidaLado());
+			//System.out.println(cols * getMedidaLado());
 			ficha.position= new Vector2D(cols * getMedidaLado(),ficha.position.getY());
-			System.out.println("ficha recargada "+ficha);
+			//System.out.println("ficha recargada "+ficha);
 			girar();
-			System.out.println("ficha girada "+ficha);
+			//System.out.println("ficha girada "+ficha);
 			
 			// si exite colision al crear la nieva ficha
-			if(	j.tablero.existsColision(ficha))
+			if(	j.tablero.existsCollision(ficha))
 				j.tablero.reloadMatriz();
 		}
 
@@ -243,7 +243,7 @@ public class GenericGame extends AbstractGame implements GameContext {
 		boolean result = false;
 		if (Message.equals(Ficha.DETECT_COLISION)) {
 
-			result = j.tablero.existsColision((Ficha) obj);
+			result = j.tablero.existsCollision((Ficha) obj);
 		}
 		return result;
 	}
@@ -257,7 +257,7 @@ public class GenericGame extends AbstractGame implements GameContext {
 	@Override
 	public Tablero getTablero() {
 		// TODO Auto-generated method stub
-		return null;
+		return j.tablero;
 	}
 	
 	public static Ficha FactoryFichaRandom(GameContext c){

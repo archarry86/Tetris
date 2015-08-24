@@ -106,10 +106,10 @@ public class Tablero extends Sprite{
 		int jm = (int) (positionFicha.getY() / medidaLado);
 		
 		int [][] matriz = ficha.getFicha();
-		System.out.println("agregrar ficha");
-		System.out.println(this);
-		System.out.println(ficha);
-		System.out.println("im "+ im + " jm "+jm + " posicion X " + positionFicha.getX() + " posicion Y " + positionFicha.getY());
+		//System.out.println("agregrar ficha");
+		//System.out.println(this);
+		//System.out.println(ficha);
+		//System.out.println("im "+ im + " jm "+jm + " posicion X " + positionFicha.getX() + " posicion Y " + positionFicha.getY());
 		
 		
 		for(int i=0; i< matriz.length;i++)
@@ -123,7 +123,7 @@ public class Tablero extends Sprite{
 		}
 	}
 	
-	public boolean existsColision(Ficha ficha) {
+	public boolean existsCollision(Ficha ficha) {
 		// TODO Auto-generated method stub
 		boolean result = false;
 		Vector2D positionFicha = ficha.position;
@@ -133,10 +133,10 @@ public class Tablero extends Sprite{
 		int im = (int) (positionFicha.getX() / medidaLado);
 		int jm = (int) (positionFicha.getY() / medidaLado);
 		
-		System.out.println("existsColision");
-		System.out.println(this);
-		System.out.println(ficha);
-		System.out.println("im "+ im + " jm "+jm + " posicion X " + positionFicha.getX() + " posicion Y " + positionFicha.getY());
+		//System.out.println("existsColision");
+		//System.out.println(this);
+		//System.out.println(ficha);
+		//System.out.println("im "+ im + " jm "+jm + " posicion X " + positionFicha.getX() + " posicion Y " + positionFicha.getY());
 		
 		
 		//System.out.println(im+" "+jm);
@@ -159,6 +159,103 @@ public class Tablero extends Sprite{
 
 	}
 	
+	/**
+	 * Detecta si hubo una colicion horizontal con elementos del tablero
+	 * precondicion se ha validado que la ficha este en los limites del tablero
+	 * @param ficha
+	 * @param direction
+	 * @return
+	 */
+	public boolean existsCollisionHorizontal(Ficha ficha, Vector2D direction){
+		System.out.println("existsCollisionHorizontal");
+		boolean result = false;
+		
+		
+		Vector2D positionFicha = ficha.position;
+		int medidaLado = GenericGame.getMedidaLado();
+		
+		int [][] matriz = ficha.getFicha();
+	
+	
+
+		if(direction.getX() > 0){
+			//al mover a la derecha 
+			
+			int minimum = (matrizTablero[0].length - matriz[0].length);
+			
+			int im = (int) (positionFicha.getX() / medidaLado);
+			int jm = (int) (positionFicha.getY() / medidaLado);
+			
+			if(im+1 <= minimum){
+				im  += 1;
+			
+			}
+			
+			 
+			/*
+			for(int i = jm ; i<jm+matriz.length && !result;i++ ){
+				System.out.println("i  "+ i + " im "+im + " posicion X " + positionFicha.getX() + " posicion Y " + positionFicha.getY());
+				
+				result = 	matrizTablero[i][im] !=0;
+			}*/
+			for(int i=0; i< matriz.length&&!result;i++)
+			{
+				for(int j=0; j< matriz[0].length && !result;j++)
+				{
+					try{
+						//System.out.print("i"+i+",j"+j);
+					
+						if(matriz[i][j]!= 0 )
+						result =	matrizTablero[jm+i][im+j] != 0;
+						
+					}catch (Exception e) {
+						// TODO: handle exception
+						System.out.println("ERROR "+(jm+i)+" "+(im+j));
+						e.printStackTrace();
+						System.exit(0);
+					}
+				}
+				System.out.println();
+			}
+			
+		}else if(direction.getX() < 0){
+			// al mover a la izquerda 
+			int im = (int) (positionFicha.getX() / medidaLado)-1;
+			int jm = (int) (positionFicha.getY() / medidaLado);
+			
+			//System.out.println("im "+ im + " jm "+jm + " posicion X " + positionFicha.getX() + " posicion Y " + positionFicha.getY());
+			
+		
+			for(int i=0; i< matriz.length&&!result;i++)
+			{
+				for(int j=0; j< matriz[0].length && !result;j++)
+				{
+					try{
+						
+					
+					if(matriz[i][j]!= 0 )
+					result =	matrizTablero[jm+i][im+j] != 0;
+					}catch (Exception e) {
+						// TODO: handle exception
+						System.out.println((jm+i)+" "+(im+j));
+						e.printStackTrace();
+						System.exit(0);
+					}
+				}
+			}
+			
+			/*
+			for(int i = jm ; i<jm+matriz.length&& !result;i++ ){
+				System.out.println("i  "+ i + " im "+im + " posicion X " + positionFicha.getX() + " posicion Y " + positionFicha.getY());
+				
+				result = 	matrizTablero[i][im] !=0;
+			}*/
+		}
+		
+		
+		return result;
+	
+	}
 	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()

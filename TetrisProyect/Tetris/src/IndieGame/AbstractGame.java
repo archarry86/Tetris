@@ -23,7 +23,7 @@ public abstract class AbstractGame extends JPanel implements Runnable,KeyListene
 	
 	public final static int NO_DELAYS_PER_YIELD=16;
 	
-	public  static int FPS=10;
+	public  static int FPS=12;
 	
 	protected  long periodo=1000/FPS;
 	

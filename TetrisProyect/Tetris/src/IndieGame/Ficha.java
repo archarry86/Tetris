@@ -345,7 +345,7 @@ public class Ficha extends  Sprite {
 				}
 			}
 		*/			
-			System.out.println("FICHA COPIADA "+f);
+			//System.out.println("FICHA COPIADA "+f);
 		return f;
 	}
 	
@@ -475,8 +475,11 @@ public class Ficha extends  Sprite {
 		}	 	
 	
 	public void move(int scalar) {
-		Vector2D 	newposition = Vector2D.Add(position, direction.Multiply(scalar));
-		boolean flag =newposition.getX() >= 0 &&  newposition.getX()+_width <= AbstractGame.Width ;
+		Vector2D direction =  this.direction.Multiply(scalar);
+		Vector2D 	newposition = Vector2D.Add(position,direction);
+		
+		boolean flag = (newposition.getX() >= 0 &&  newposition.getX()+_width <= AbstractGame.Width) && (!_contexto.getTablero().existsCollisionHorizontal(this,direction)) ;
+		
 		//System.out.println(newposition);
 		if(flag)
 		position = newposition;
@@ -484,7 +487,7 @@ public class Ficha extends  Sprite {
 	}
 	
 	public void rotate(){
-		System.out.println(" rotate ");
+		//System.out.println(" rotate ");
 		orientation++;
 		orientation = orientation % 4;
 		
@@ -497,13 +500,13 @@ public class Ficha extends  Sprite {
 		colsMatrizL = aux;
 				
 		int temp = (int)position.getX() + _width;
-		System.out.println(temp+" comparacion "+ GenericGame.Width);
+		//System.out.println(temp+" comparacion "+ GenericGame.Width);
 		if (temp > GenericGame.Width){
 		
 			Vector2D v = new Vector2D(temp - GenericGame.Width,0).Multiply(-1);	
-			System.out.println("ini correccion "+ position);
+			//System.out.println("ini correccion "+ position);
 			position = Vector2D.Add(position, v);
-			System.out.println("fin correccion "+ position);
+			//System.out.println("fin correccion "+ position);
 		}
 		
 	}
@@ -737,11 +740,14 @@ public class Ficha extends  Sprite {
 	protected void update() {
 		////
 		if (Input.FLECHA_DERECHA) {
+			
+	
 			move(1);
 		}
 		else if (Input.FLECHA_IZQUIERDA) {
 			move(-1);
 		}
+		
 		if (Input.ROTACION) {
 			rotate();
 		}

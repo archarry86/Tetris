@@ -21,8 +21,8 @@ public class GameProperties {
 			prop.load(input);
 
 			// get the property value and print it out
-			System.out.println(prop.getProperty("widht"));
-			System.out.println(prop.getProperty("height"));
+			//System.out.println(prop.getProperty("widht"));
+			//System.out.println(prop.getProperty("height"));
 			
 			AbstractGame.Width = Integer.parseInt(prop.getProperty("widht"));
 			AbstractGame.Height = Integer.parseInt(prop.getProperty("height"));
