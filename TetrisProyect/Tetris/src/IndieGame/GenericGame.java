@@ -211,6 +211,7 @@ public class GenericGame extends AbstractGame implements GameContext {
 		if (Message.equals(Ficha.UBICARFICHA)) {
 			// System.out.println(j.toString());
 			j.tablero.agregarFicha(ficha);
+			j.tablero.limpiarFila(ficha);
 			// System.out.println(j.toString());
 			// TODO QUEMADO
 
@@ -220,10 +221,10 @@ public class GenericGame extends AbstractGame implements GameContext {
 			ficha.ReloadFicha(FichaInicial);
 			
 			//test
-			cols ++;
-			cols = cols % (Juego.COLUMNAS);
+			//cols ++;
+			cols = GenericGame.Width / 2;
 			//System.out.println(cols * getMedidaLado());
-			ficha.position= new Vector2D(cols * getMedidaLado(),ficha.position.getY());
+			ficha.position= new Vector2D(cols,ficha.position.getY());
 			//System.out.println("ficha recargada "+ficha);
 			girar();
 			//System.out.println("ficha girada "+ficha);

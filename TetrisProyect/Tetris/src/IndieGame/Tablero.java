@@ -257,6 +257,49 @@ public class Tablero extends Sprite{
 	
 	}
 	
+	public void limpiarFila(Ficha ficha){
+		
+		Vector2D positionFicha = ficha.position;
+		int medidaLado = GenericGame.getMedidaLado();
+				
+		int im = (int) (positionFicha.getX() / medidaLado);
+		int jm = (int) (positionFicha.getY() / medidaLado);
+		
+		int [][] matriz = ficha.getFicha();
+		
+		
+		
+		for(int i=jm; i< jm + matriz.length;i++) // validar todas de la matriz del tablero que fueron ocupadas por la nueva ficha
+		{
+			boolean filaCompleta = true;			
+			for( int j =0; j< matrizTablero[0].length;j++)
+			{
+				if (matrizTablero[i][j] == 0) {// recorrer la fila completa buscando espacios en blanco
+					filaCompleta = false;	
+					break;
+				}
+			}
+			if (filaCompleta) // desplazar desde esa posicion la matriz hacia abajo  
+			{								
+				for (int indice = i; indice > 0; indice--) 
+				{
+					boolean filaVacia = true;
+					for (int j = 0; j < matrizTablero[0].length; j++) 
+					{
+						//matrizTablero[i][j] = 0;
+						matrizTablero[indice][j] = matrizTablero[indice-1][j]; 
+						if (matrizTablero[indice-1][j] != 0) 
+							filaVacia = false;
+					}
+					if (filaVacia) 
+						break;
+				}
+			}
+		}
+		
+	}
+	
+	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
