@@ -57,4 +57,11 @@ public interface GameContext {
 	public abstract boolean SendGetMessageBool(Object obj, String Message);
 	
 	public abstract String SendGetMessageString(Object obj, String Message);
+	
+	
+	public long GetTime();
+	
+
+	
+	public long Fps();
 }

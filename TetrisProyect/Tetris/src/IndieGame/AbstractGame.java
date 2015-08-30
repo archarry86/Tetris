@@ -23,7 +23,7 @@ public abstract class AbstractGame extends JPanel implements Runnable,KeyListene
 	
 	public final static int NO_DELAYS_PER_YIELD=16;
 	
-	public  static int FPS=5;
+	public  static int FPS=30      ;
 	
 	protected  long periodo=1000/FPS;
 	
@@ -168,8 +168,30 @@ public abstract class AbstractGame extends JPanel implements Runnable,KeyListene
    }
    
    
-  
+
+
+	public long GetTime() {
+		// TODO Auto-generated method stub
+		if(to== 0)
+			return 0;
+		 long tf=System.nanoTime()-to;
+		 
+		// tf= tf/1000000000;
+		return tf;
+		
+		
+	}
 	
+	
+	public long Fps(){
+		
+			long tf = GetTime();
+		
+		   double t= tf;
+		   long fps=(long) ((frames/t)*1000000000); 
+		   
+		   return fps;
+	}
 
    
 }

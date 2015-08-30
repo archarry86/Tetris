@@ -330,7 +330,7 @@ public class Ficha extends  Sprite {
 	public Ficha Copy(){
 		Ficha f = new Ficha(tipo, color.getRGB());
 		f._contexto = _contexto;
-		
+		f.position = this.position.Copy();
 		for(int i = 0;i<orientation;i++){
 			f.rotate();
 		}
@@ -487,6 +487,8 @@ public class Ficha extends  Sprite {
 	}
 	
 	public void rotate(){
+		
+		
 		//System.out.println(" rotate ");
 		orientation++;
 		orientation = orientation % 4;
@@ -508,6 +510,9 @@ public class Ficha extends  Sprite {
 			position = Vector2D.Add(position, v);
 			//System.out.println("fin correccion "+ position);
 		}
+		
+	
+		
 		
 	}
 	
@@ -735,7 +740,28 @@ public class Ficha extends  Sprite {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	int counter = 0;
+	
+	private  int pivote = 30;
+	
+	private static final int pivoteconstante = 30;
 
+
+	
+	public void setVelocity(int pivote) {
+		this.pivote = pivote;
+	}
+
+	
+	public int getVelocity(){
+		return pivote ;
+	}
+
+
+	/* (non-Javadoc)
+	 * @see IndieGame.Sprite#update()
+	 */
 	@Override
 	protected void update() {
 		////
@@ -748,29 +774,69 @@ public class Ficha extends  Sprite {
 			move(-1);
 		}
 		
-		if (Input.ROTACION) {
-			rotate();
+		if (Input.ROTACION) {                                          
+			
+		 	/*Ficha cp = this.Copy();
+		 	cp.rotate();
+			boolean resul = 	_contexto.SendGetMessageBool(cp, Ficha.DETECT_COLISION); 
+			System.out.println(resul);
+			if(!resul)*/
+			//System.out.println("ROTACION");
+			//System.out.println("original");
+			//System.out.println(this);
+			Ficha  f = this.Copy();
+			f.rotate();
+			
+			int temp = (int)position.getY() + _height;
+			
+			//si la altura es mayor o igual al largo de la pantalla
+			//no se debe hacer la colicion 
+			//ya que ae producira un indexbounsexception
+			if(!(temp >= GenericGame.Height)&&!_contexto.getTablero().existsCollisionRotacion(f)){
+
+		    rotate();
+			}
+				//rotate();
 		}
-		
+		System.out.println(Input.FLECHA_ABAJO);
 		if (Input.FLECHA_ABAJO > 0) {
-			;
+		
+		   if(Input.FLECHA_ABAJO < 0.25)
+			pivote = 25;
+			 if(Input.FLECHA_ABAJO < 0.5)
+				 pivote = 15;
+			 if(Input.FLECHA_ABAJO < 0.75)
+				 pivote = 1;
 		}
+		else
+			 pivote =pivoteconstante;
 		///
 		
 		//// rogidbody
 		// TODO Auto-generated method stub
-	Vector2D	auxposition = Vector2D.Add(position, _contexto.getGravedad());
- 	Ficha cp = this.Copy();
-	cp.position = auxposition;
-	boolean resul = 	auxposition.getY() > GenericGame.Height- _height ||_contexto.SendGetMessageBool(cp, Ficha.DETECT_COLISION) ;
-		if( resul ){
-			//TODO metodo de ejemplo
-			_contexto.SendMessage(this, Ficha.UBICARFICHA);			
-		}
-		else{
-			
-			position = auxposition;
-			
+		
+		//System.out.println( this._contexto.GetTime());
+		//System.out.println( this._contexto.GetTime()%5);
+		//System.out.println(animPeriod);
+		/*animTotalTime = (animTotalTime + animPeriod) % (long)(1000 * seqDuration);
+		System.out.println(animTotalTime);*/
+		counter ++;
+		if(counter % pivote == 0)
+		{
+			Vector2D	auxposition = Vector2D.Add(position, _contexto.getGravedad());
+		 	Ficha cp = this.Copy();
+			cp.position = auxposition;
+			boolean resul = 	auxposition.getY() > GenericGame.Height- _height ||_contexto.SendGetMessageBool(cp, Ficha.DETECT_COLISION) ;
+				if( resul ){
+					//TODO metodo de ejemplo
+					_contexto.SendMessage(this, Ficha.UBICARFICHA);			
+				}
+				else{
+					
+					position = auxposition;
+					
+				}
+				
 		}
 		///
 		

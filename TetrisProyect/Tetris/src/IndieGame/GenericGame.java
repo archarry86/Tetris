@@ -86,10 +86,11 @@ public class GenericGame extends AbstractGame implements GameContext {
 			//ficha.rotate();
 			// System.out.println(ficha.toString());
 			Input.ROTACION = true;
+			//System.out.println(Input.ROTACION);
 			break;
 		case  KeyEvent.VK_DOWN:
 			
-			Input.FLECHA_ABAJO += 0.001;
+			Input.FLECHA_ABAJO += 0.04;
 			if(Input.FLECHA_ABAJO > 1)
 				Input.FLECHA_ABAJO = 1;
 			break;
@@ -102,8 +103,7 @@ public class GenericGame extends AbstractGame implements GameContext {
 		// TODO Auto-generated method stub
 		switch (arg0.getKeyCode()) {
 		case  KeyEvent.VK_DOWN:			
-			Input.FLECHA_ABAJO -= 0.001;
-			if(Input.FLECHA_ABAJO < 0)
+			
 				Input.FLECHA_ABAJO = 0;
 			break;			
 		case KeyEvent.VK_LEFT:			
@@ -116,6 +116,7 @@ public class GenericGame extends AbstractGame implements GameContext {
 			//ficha.rotate();
 			// System.out.println(ficha.toString());
 			Input.ROTACION = false;
+			//System.out.println(Input.ROTACION);
 			break;
 		}
 	}
@@ -292,4 +293,5 @@ public class GenericGame extends AbstractGame implements GameContext {
 			ficha.rotate();
 		
 	}
+
 }

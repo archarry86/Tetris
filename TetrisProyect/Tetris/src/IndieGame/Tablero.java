@@ -117,6 +117,7 @@ public class Tablero extends Sprite{
 			for(int j=0; j< matriz[0].length;j++)
 			{
 				//System.out.println("im " +( im+ i) + " ijm " +( jm+j));
+				
 				if(matriz[i][j] != 0)
 				matrizTablero[jm+i][im+j]= matriz[i][j];
 			}
@@ -150,9 +151,11 @@ public class Tablero extends Sprite{
 		{
 			for(int j=0; j< matriz[0].length && !result;j++)
 			{
-				if(matriz[i][j]!= 0 )
-				result =	matrizTablero[jm+i][im+j] != 0;
+				//if()
+		
+				result =	matriz[i][j]!= 0  &&matrizTablero[jm+i][im+j] != 0;
 			}
+			//System.out.println();
 		}
 		
 		return result;
@@ -167,7 +170,7 @@ public class Tablero extends Sprite{
 	 * @return
 	 */
 	public boolean existsCollisionHorizontal(Ficha ficha, Vector2D direction){
-		System.out.println("existsCollisionHorizontal");
+		//System.out.println("existsCollisionHorizontal");
 		boolean result = false;
 		
 		
@@ -215,7 +218,7 @@ public class Tablero extends Sprite{
 						System.exit(0);
 					}
 				}
-				System.out.println();
+			//	System.out.println();
 			}
 			
 		}else if(direction.getX() < 0){
@@ -256,6 +259,44 @@ public class Tablero extends Sprite{
 		return result;
 	
 	}
+	
+	public boolean existsCollisionRotacion(Ficha ficha){
+		//System.out.println("existsCollisionRotacion");
+		boolean result = false;
+		
+		
+		Vector2D positionFicha = ficha.position;
+		int medidaLado = GenericGame.getMedidaLado();
+		int im = (int) (positionFicha.getX() / medidaLado);
+		int jm = (int) (positionFicha.getY() / medidaLado);
+		
+		int [][] matriz = ficha.getFicha();
+		//System.out.println(im+" "+jm);
+			for(int i=0; i< matriz.length&&!result;i++)
+			{
+				for(int j=0; j< matriz[0].length && !result;j++)
+				{
+					try{
+						//System.out.print("i"+i+",j"+j);
+					
+						//System.out.print("["+matriz[i][j]+"] ["+matrizTablero[jm+i][im+j]+"]" );
+							result =matriz[i][j]!= 0	&&matrizTablero[jm+i][im+j] != 0;
+						                       
+					}catch (Exception e) {
+						// TODO: handle exception
+						//System.out.println("ERROR "+(jm+i)+" "+(im+j));
+						e.printStackTrace();
+						System.exit(0);
+					}
+				}
+				//System.out.println();
+			}
+			
+		
+		return result;
+	
+	}
+	
 	
 	public void limpiarFila(Ficha ficha){
 		

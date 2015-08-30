@@ -34,11 +34,17 @@ public class Main {
 		//Juego juego = new Juego();
 		
 		
-		
+		try {
+			
+	
 		Frame f = new Frame();
 		f.setVisible(true);
 		f.setLocationRelativeTo(null);
-		
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			System.exit(0);
+		}
 		
 	}	
 	
