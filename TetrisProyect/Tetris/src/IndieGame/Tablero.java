@@ -260,6 +260,7 @@ public class Tablero extends Sprite{
 	
 	}
 	
+
 	public boolean existsCollisionRotacion(Ficha ficha){
 		//System.out.println("existsCollisionRotacion");
 		boolean result = false;
@@ -298,7 +299,14 @@ public class Tablero extends Sprite{
 	}
 	
 	
-	public void limpiarFila(Ficha ficha){
+
+	/**Valida si una o más fila fueron completadas 
+	 * @param ficha
+	 * @return numero de filas completadas
+	 */
+	
+	public int limpiarFila(Ficha ficha){
+
 		
 		Vector2D positionFicha = ficha.position;
 		int medidaLado = GenericGame.getMedidaLado();
@@ -307,44 +315,37 @@ public class Tablero extends Sprite{
 		int jm = (int) (positionFicha.getY() / medidaLado);
 		
 		int [][] matriz = ficha.getFicha();
-		
-		
+		int filasCompletadas = 0;		
 		
 		for(int i=jm; i< jm + matriz.length;i++) // validar todas de la matriz del tablero que fueron ocupadas por la nueva ficha
 		{
 			boolean filaCompleta = true;			
-			for( int j =0; j< matrizTablero[0].length;j++)
+			buscarFilaCompleta: for( int j =0; j< matrizTablero[0].length;j++)
 			{
 				if (matrizTablero[i][j] == 0) {// recorrer la fila completa buscando espacios en blanco
-					filaCompleta = false;	
-					break;
+					filaCompleta = false;					
+					break buscarFilaCompleta;
 				}
 			}
 			if (filaCompleta) // desplazar desde esa posicion la matriz hacia abajo  
-			{								
-				for (int indice = i; indice > 0; indice--) 
-				{
-					int c = 0;
-					boolean filaVacia = false;
+			{			
+				filasCompletadas++;
+				desplazarLineas: for (int indice = i; indice > 0; indice--) 
+				{					
+					boolean filaVacia = true;
 					for (int j = 0; j < matrizTablero[0].length; j++) 
 					{
-						//matrizTablero[i][j] = 0;
 						matrizTablero[indice][j] = matrizTablero[indice-1][j]; 
-						if (matrizTablero[indice-1][j] != 0) 
-							c++;
-						if (j == matrizTablero[0].length - 1) { // ultima columna de la fila
-							if (c == 0) {//La fila esta llena de 0 
-								filaVacia = true;
-								break;							
-							}
-						}
-					}
-					if (filaVacia) 
-						break;					
+						if (matrizTablero[indice-1][j] != 0) // valida si hay fichas o espacios en blanco
+							filaVacia = false;
+						if (j == matrizTablero[0].length - 1)  // valida en la ultima columna de la fila
+							if (filaVacia) //La fila esta llena de 0 
+								break desplazarLineas;	
+					}	
 				}
 			}
 		}
-		
+		return filasCompletadas;
 	}
 	
 	

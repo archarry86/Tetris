@@ -15,6 +15,7 @@ import java.util.Random;
 import javax.imageio.ImageIO;
 
 import Math.Vector2D;
+//import Vista.PnlLineas;
 
 public class GenericGame extends AbstractGame implements GameContext {
 
@@ -63,7 +64,7 @@ public class GenericGame extends AbstractGame implements GameContext {
 			s.draw(g);
 		}
 
-		reportarEstadisticas(g);
+		//reportarEstadisticas(g);
 
 	}
 
@@ -212,7 +213,11 @@ public class GenericGame extends AbstractGame implements GameContext {
 		if (Message.equals(Ficha.UBICARFICHA)) {
 			// System.out.println(j.toString());
 			j.tablero.agregarFicha(ficha);
-			j.tablero.limpiarFila(ficha);
+			//int filasCompletadas = j.tablero.limpiarFila(ficha);
+			
+			
+			
+			//System.out.println("filasCompletadas " + filasCompletadas);
 			// System.out.println(j.toString());
 			// TODO QUEMADO
 
