@@ -51,11 +51,12 @@ public abstract class AbstractGame extends JPanel implements Runnable,KeyListene
     
     protected AbstractGame(){
     	
-    
+    super();
     	runing=true;
     	isPause=false;
     	 lista = new ArrayList<Sprite>();
     	 periodo=(1000/FPS);
+    	 this.setSize(AbstractGame.Width,AbstractGame.Height);
     }
     
     public void GameStar()

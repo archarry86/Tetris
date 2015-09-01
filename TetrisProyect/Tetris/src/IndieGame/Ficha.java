@@ -27,6 +27,10 @@ public class Ficha extends  Sprite {
 	private int filasMatrizL;
 	private int colsMatrizL;
 
+	private final int NORMAL = 0;
+	
+	private final int JIRADO = 1;
+	private volatile int  state = NORMAL;
 	
 	public Color getC() {
 		return color;
@@ -745,6 +749,8 @@ public class Ficha extends  Sprite {
 	
 	private  int pivote = 30;
 	
+	private  int pivoteHrizontal = 5;
+	
 	private static final int pivoteconstante = 30;
 
 
@@ -765,6 +771,10 @@ public class Ficha extends  Sprite {
 	@Override
 	protected void update() {
 		////
+		
+	
+		if(counter % pivoteHrizontal == 0)
+		{
 		if (Input.FLECHA_DERECHA) {
 			
 	
@@ -773,8 +783,10 @@ public class Ficha extends  Sprite {
 		else if (Input.FLECHA_IZQUIERDA) {
 			move(-1);
 		}
-		
-		if (Input.ROTACION) {                                          
+		}
+	System.out.println((state == NORMAL) +" estado real");
+		if ( state == NORMAL&& Input.ROTACION ) {                                          
+			
 			
 		 	/*Ficha cp = this.Copy();
 		 	cp.rotate();
@@ -784,6 +796,7 @@ public class Ficha extends  Sprite {
 			//System.out.println("ROTACION");
 			//System.out.println("original");
 			//System.out.println(this);
+			
 			Ficha  f = this.Copy();
 			f.rotate();
 			
@@ -793,12 +806,17 @@ public class Ficha extends  Sprite {
 			//no se debe hacer la colicion 
 			//ya que ae producira un indexbounsexception
 			if(!(temp >= GenericGame.Height)&&!_contexto.getTablero().existsCollisionRotacion(f)){
-
-		    rotate();
+				System.out.println(state);
+				state = JIRADO;
+				rotate();
 			}
 				//rotate();
 		}
-		System.out.println(Input.FLECHA_ABAJO);
+		else if(state == JIRADO&& !Input.ROTACION ){
+			System.out.println("COME BACK NORMAL");
+			state = NORMAL;
+		}
+		
 		if (Input.FLECHA_ABAJO > 0) {
 		
 		   if(Input.FLECHA_ABAJO < 0.25)

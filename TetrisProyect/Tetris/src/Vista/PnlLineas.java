@@ -16,11 +16,12 @@ public class PnlLineas extends JPanel{
 	public String numeroLineas;
 	
 	public PnlLineas(){		
-		
+		super();
 		
 		lineas = new String("LINES ");
 		numeroLineas = new String("");
-		
+		//this.setLocation(arg0)
+		this.setSize(100, 100);
 	}
 	
 	
@@ -30,13 +31,13 @@ public class PnlLineas extends JPanel{
 	
 	@Override
 	public void paint(Graphics g) {		
-		
+		super.paint(g);
 		Font fuente = new Font("Arial", Font.BOLD, 20);		
 		
 		g.setFont(fuente);
 		
-		g.drawString(lineas, 450, 80);
-		g.drawString(numeroLineas, 450, 120);
+		g.drawString(lineas, 50, 50);
+		g.drawString(numeroLineas, 50, 100);
 	}
 	
 	

@@ -16,11 +16,18 @@ import javax.imageio.ImageIO;
 
 import Math.Vector2D;
 //import Vista.PnlLineas;
+import Vista.PnlLineas;
 
 public class GenericGame extends AbstractGame implements GameContext {
 
 	private volatile Juego j = null;
 	private volatile Ficha ficha = null;
+
+	private PnlLineas lineas;
+	
+	public void setLineas(PnlLineas lineas) {
+		this.lineas = lineas;
+	}
 
 	public GenericGame() {
 		super();
@@ -117,6 +124,7 @@ public class GenericGame extends AbstractGame implements GameContext {
 			//ficha.rotate();
 			// System.out.println(ficha.toString());
 			Input.ROTACION = false;
+			System.out.println("FALSE ROTACION");
 			//System.out.println(Input.ROTACION);
 			break;
 		}
@@ -213,8 +221,24 @@ public class GenericGame extends AbstractGame implements GameContext {
 		if (Message.equals(Ficha.UBICARFICHA)) {
 			// System.out.println(j.toString());
 			j.tablero.agregarFicha(ficha);
-			//int filasCompletadas = j.tablero.limpiarFila(ficha);
+			int filasCompletadas = j.tablero.limpiarFila(ficha);
 			
+			if(filasCompletadas > 0){
+				j.totalLineas+= filasCompletadas;
+				if(lineas != null){
+					
+				lineas.numeroLineas = ""+j.totalLineas;
+				new Thread(){
+					
+					public synchronized void start() {
+						
+						lineas.repaint();
+					};
+					
+				}.start();
+				
+				}
+			}
 			
 			
 			//System.out.println("filasCompletadas " + filasCompletadas);

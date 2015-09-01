@@ -3,7 +3,7 @@ package IndieGame;
 
 public class Juego {
 
-	
+	int totalLineas;
 	
 
 	final static int COLUMNAS = 10;
