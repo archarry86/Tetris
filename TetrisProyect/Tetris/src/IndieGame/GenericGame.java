@@ -23,6 +23,12 @@ public class GenericGame extends AbstractGame implements GameContext {
 	private volatile Juego j = null;
 	private volatile Ficha ficha = null;
 
+	private static int medidaLado ;
+	
+	public static void SetMedidaLado(int medidaLado){
+		GenericGame.medidaLado = medidaLado;
+	}
+	
 	private PnlLineas lineas;
 	
 	public void setLineas(PnlLineas lineas) {
@@ -207,7 +213,7 @@ public class GenericGame extends AbstractGame implements GameContext {
 	}
 
 	public static int getMedidaLado() {
-		return GenericGame.Width / Juego.COLUMNAS;
+		return medidaLado;//GenericGame.Width / Juego.COLUMNAS;
 	}
 
 	// TODO ATRIBUTO MODEO TEXT

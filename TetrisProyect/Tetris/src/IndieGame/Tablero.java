@@ -12,8 +12,8 @@ public class Tablero extends Sprite{
 	
 	public Tablero(){
 
-		int c =GenericGame.Width / GenericGame.getMedidaLado();
-		int f =GenericGame.Height / GenericGame.getMedidaLado();
+		int c =10;//GenericGame.Width / GenericGame.getMedidaLado();
+		int f = 20;//GenericGame.Height / GenericGame.getMedidaLado();
 	
 		matrizTablero = new int[f][c];
 		

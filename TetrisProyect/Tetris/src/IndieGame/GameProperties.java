@@ -29,6 +29,10 @@ public class GameProperties {
 			GenericGame.Width = Integer.parseInt(prop.getProperty("widht"));
 			GenericGame.Height = Integer.parseInt(prop.getProperty("height"));
 			
+			int medida = GenericGame.Height / 20;
+			GenericGame.SetMedidaLado(medida);
+			GenericGame.Width = 10 * medida;
+			
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		} finally {
